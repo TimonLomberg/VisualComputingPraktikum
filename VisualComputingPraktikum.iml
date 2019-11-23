@@ -15,7 +15,9 @@
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../opencv/build/java/opencv-411.jar!/" />
         </CLASSES>
-        <JAVADOC />
+        <JAVADOC>
+          <root url="https://docs.opencv.org/master/javadoc/" />
+        </JAVADOC>
         <NATIVE>
           <root url="file://$MODULE_DIR$/../../opencv/build/java/x64" />
         </NATIVE>
@@ -40,6 +42,19 @@
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/dependencies/objloader/OBJLoader-3.0.0.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="file://$MODULE_DIR$/dependencies/objloader/javadoc" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/dependencies/objloader/OBJLoader-3.0.0.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
   </component>
