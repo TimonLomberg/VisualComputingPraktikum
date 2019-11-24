@@ -55,6 +55,13 @@ public class CameraCalibrator {
                 Calib3d.CALIB_CB_ADAPTIVE_THRESH | Calib3d.CALIB_CB_FAST_CHECK | Calib3d.CALIB_CB_NORMALIZE_IMAGE);
     }
 
+    /**
+     * Draws Points on all corners of a chessboard in a image
+     *
+     * @param image The image with the chessboard-pattern
+     * @param height The number of corners x-wise
+     * @param width The number of corners y-wise
+     */
     public void detectAndDrawCorners(Mat image, int height, int width) {
         boolean found = findCornersChessboard(image, height, width);
         if(found)
