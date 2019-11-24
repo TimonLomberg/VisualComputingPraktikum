@@ -58,16 +58,18 @@ public class CameraCalibrator {
     /**
      * Draws Points on all corners of a chessboard in a image
      *
-     * @param image The image with the chessboard-pattern
+     * @param image The image with the chessboard-pattern to draw on
      * @param height The number of corners x-wise
      * @param width The number of corners y-wise
      */
-    public void detectAndDrawCorners(Mat image, int height, int width) {
-        boolean found = findCornersChessboard(image, height, width);
+    public void detectAndDrawCorners(Mat image,  int width, int height) {
+        boolean found = findCornersChessboard(image, width, height);
         if(found)
             Imgproc.cornerSubPix(image, (Mat) corners, new Size(11, 11), new Size(-1,-1),
                     new TermCriteria(TermCriteria.EPS + TermCriteria.MAX_ITER, 30, 0.1));
+        else System.err.println("No chessboard detected!");
         Calib3d.drawChessboardCorners(image, boardSize, corners, found);
+
     }
 
 
