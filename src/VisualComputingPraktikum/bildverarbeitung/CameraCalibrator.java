@@ -50,7 +50,7 @@ public class CameraCalibrator {
      * @param sizeY The size of the chessboard pattern (Y)
      * @return If the method found the pattern
      */
-    public boolean findCornersChessboard(Mat image, int sizeX, int sizeY) {
+    private boolean findCornersChessboard(Mat image, int sizeX, int sizeY) {
         return Calib3d.findChessboardCorners(image, new Size(sizeX,sizeY), corners,
                 Calib3d.CALIB_CB_ADAPTIVE_THRESH | Calib3d.CALIB_CB_FAST_CHECK | Calib3d.CALIB_CB_NORMALIZE_IMAGE);
     }
