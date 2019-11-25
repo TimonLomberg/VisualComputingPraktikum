@@ -13,6 +13,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import VisualComputingPraktikum.bildverarbeitung.CameraCalibrator;
 import org.opencv.core.CvException;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfInt;
@@ -20,6 +21,7 @@ import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
+import org.opencv.videoio.Videoio;
 
 /**
  * Simple application, that opens a video stream
@@ -124,12 +126,12 @@ public class VideoProcessing extends JFrame {
 	private void processShowVideo() {	    
 
 		// BEGIN: Prepare streaming from internal web cam
-//    	VideoCapture cap = new VideoCapture(0);
+    	VideoCapture cap = new VideoCapture(0);
 		// END: Prepare streaming from internal web cam		
 
 	   // BEGIN: Prepare streaming from video file
-       String filePathName = getFilePathName();
-	   VideoCapture cap = new VideoCapture(filePathName);
+       //String filePathName = getFilePathName();
+	   //VideoCapture cap = new VideoCapture(filePathName);
  	   // END: Prepare streaming from video file
 
        Mat frame = new Mat();
@@ -158,11 +160,14 @@ public class VideoProcessing extends JFrame {
     	   imgPanel1.setImage(Mat2BufferedImage(frame));
 	    
     	   // convert the frame to a grayscale image
-    	   Imgproc.cvtColor(frame, processedImage, Imgproc.COLOR_BGR2GRAY);
+		   Mat grayImg = new Mat();
+		  // Imgproc.cvtColor(frame, grayImg, Imgproc.COLOR_BGR2GRAY);
     	   // binarize the grayscale image
-    	   Imgproc.threshold(processedImage, processedImage, 127, 255, 
-    			   Imgproc.THRESH_BINARY); 
-    	   
+    	   //Imgproc.threshold(processedImage, processedImage, 127, 255,
+    		//	   Imgproc.THRESH_BINARY);
+
+			processedImage = CameraCalibrator.detectAndDrawCorners(frame, 7,7);
+
     	   // Show processed image
     	   imgPanel2.setImage(Mat2BufferedImage(processedImage));
     	   pack();
