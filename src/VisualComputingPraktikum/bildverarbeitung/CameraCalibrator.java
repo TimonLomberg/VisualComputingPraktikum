@@ -1,11 +1,13 @@
 package VisualComputingPraktikum.bildverarbeitung;
 
 import org.opencv.calib3d.Calib3d;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfPoint2f;
-import org.opencv.core.Size;
-import org.opencv.core.TermCriteria;
+import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Vector;
 
 enum Modes { CAPTURING, DETECTION, CALIBRATED}
 
@@ -13,8 +15,8 @@ public class CameraCalibrator {
 
     Modes mode = Modes.CAPTURING;
 
-
-
+    private static final Size boardSize = new Size(7,7);
+    private static final float squareSize = 30f;
     /*
     static int[] testInt = {0};
     public static void main(String[] args) {    }
@@ -60,7 +62,28 @@ public class CameraCalibrator {
         return out;
     }
 
+    //TODO work here
+    public static void calibrate(List<Mat> objectPoints, List<Mat> imagePoints, Mat cameraMatrix, Mat distCoeffs, List<Mat> rvecs, List<Mat> tvecs) {
+        MatOfPoint3f corners = new MatOfPoint3f();
+        calcBordCornerPoints(boardSize, squareSize, corners);
+        cameraMatrix = Mat.eye(3,3, CvType.CV_64F);
+        distCoeffs = Mat.zeros(8,1, CvType.CV_64F);
+        Calib3d.calibrateCamera(objectPoints, imagePoints, new Size(7,7), cameraMatrix, distCoeffs, rvecs, tvecs);
+    }
 
+    //TODO work here
+    private static List<Mat> calcBordCornerPoints(Size boardSize, float squareSize, MatOfPoint3f corners) {
+        for(int i=0; i < boardSize.height; i++) {
+            for(int j=0;j < boardSize.width; j++) {
+                corners.push_back( new MatOfPoint3f(new Point3(j*squareSize, i*squareSize, 0f)));
+            }
+        }
+        ArrayList<Mat> out = new ArrayList<Mat>();
 
+        for(int i=0;i < corners.width(); i++) {
 
+        }
+
+        return out;
+    }
 }
