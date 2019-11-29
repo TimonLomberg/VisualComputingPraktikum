@@ -7,6 +7,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
@@ -14,7 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import VisualComputingPraktikum.bildverarbeitung.CameraCalibrator;
-import VisualComputingPraktikum.bildverarbeitung.HoughCirclesRun;
+//import VisualComputingPraktikum.bildverarbeitung.HoughCirclesRun;
 import org.opencv.core.CvException;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfInt;
@@ -41,6 +43,15 @@ public class VideoProcessing extends JFrame {
     private BufferedImagePanel imgPanel1;
     private BufferedImagePanel imgPanel2;
     private static JFileChooser fileChooser = new JFileChooser(System.getProperty("user.dir"));
+
+
+    private static final int calibSampleSize = 10;
+    private static final Size boardSize = new Size(7,7);
+	private static final float squareSize = 10f;
+
+
+    int samplesCollected;
+    ArrayList<Mat> collectedFrames;
 	
 	/**
 	 * Create object and perform the processing by calling private member functions.
@@ -49,6 +60,8 @@ public class VideoProcessing extends JFrame {
 	public VideoProcessing() {
 		imgPanel1 = null;
 		imgPanel2 = null;
+		samplesCollected = 0;
+		collectedFrames = new ArrayList<Mat>(calibSampleSize);
 		
 		createFrame();
 		processShowVideo();
@@ -167,8 +180,27 @@ public class VideoProcessing extends JFrame {
     	   //Imgproc.threshold(processedImage, processedImage, 127, 255,
     		//	   Imgproc.THRESH_BINARY);
 
-		   	processedImage = new HoughCirclesRun().HoughCircle(frame);
-			//processedImage = CameraCalibrator.detectAndDrawCorners(frame, 7,7);
+		   //	processedImage = new HoughCirclesRun().HoughCircle(frame);
+		//	processedImage = CameraCalibrator.detectAndDrawCorners(frame, 7,7);
+
+
+			if(collectFrames(calibSampleSize, frame, collectedFrames)) {
+
+				List<Mat> objectPoints = new ArrayList<Mat>();
+				List<Mat> imagePoints = new ArrayList<Mat>();
+				Mat cameraMatrix = new Mat();
+				Mat distCoeffs = new Mat();
+				List<Mat> rvecs = new ArrayList<Mat>();
+				List<Mat> tvecs = new ArrayList<Mat>();
+				CameraCalibrator.calibrate(collectedFrames, calibSampleSize, boardSize, squareSize, objectPoints, imagePoints, cameraMatrix, distCoeffs, rvecs, tvecs);
+
+				System.out.println("" + cameraMatrix);
+			}
+
+
+
+
+
 
     	   // Show processed image
     	   imgPanel2.setImage(Mat2BufferedImage(processedImage));
@@ -211,4 +243,11 @@ public class VideoProcessing extends JFrame {
     	imgMat.get(0, 0, bufferedImageBuffer);
     	return bufferedImage;
     }
+
+    private boolean collectFrames(int sampleSize, Mat frame, List<Mat> imageList) {
+    	if(! (samplesCollected >= sampleSize)) {
+    		imageList.add(frame);
+    		return false;
+		} else return true;
+	}
 }

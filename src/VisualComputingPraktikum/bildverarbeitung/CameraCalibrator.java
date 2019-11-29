@@ -1,5 +1,6 @@
 package VisualComputingPraktikum.bildverarbeitung;
 
+import org.jetbrains.annotations.NotNull;
 import org.opencv.calib3d.Calib3d;
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
@@ -34,6 +35,7 @@ public class CameraCalibrator {
      * @return If the method found the pattern
      */
     private static boolean findCornersChessboard(Mat image, int sizeX, int sizeY, MatOfPoint2f corners) {
+
         return Calib3d.findChessboardCorners(image, new Size(sizeX,sizeY), corners,
                 Calib3d.CALIB_CB_ADAPTIVE_THRESH | Calib3d.CALIB_CB_FAST_CHECK | Calib3d.CALIB_CB_NORMALIZE_IMAGE);
     }
@@ -63,25 +65,33 @@ public class CameraCalibrator {
     }
 
     //TODO work here
-    public static void calibrate(List<Mat> objectPoints, List<Mat> imagePoints, Mat cameraMatrix, Mat distCoeffs, List<Mat> rvecs, List<Mat> tvecs) {
-        MatOfPoint3f corners = new MatOfPoint3f();
-        calcBordCornerPoints(boardSize, squareSize, corners);
+    public static void calibrate(@NotNull ArrayList<Mat> frames,@NotNull int sampleSize,@NotNull Size boardSize,@NotNull float squareSize, List<Mat> objectPoints, List<Mat> imagePoints, Mat cameraMatrix, Mat distCoeffs, List<Mat> rvecs, List<Mat> tvecs) {
+
+
+        MatOfPoint3f objectCorners = new MatOfPoint3f();
+        MatOfPoint2f imageCorners  = new MatOfPoint2f();
+        objectPoints = calcBordCornerPoints(boardSize, squareSize, objectCorners, sampleSize);
+
+        for(int i = 0;i < sampleSize; i++) {
+            findCornersChessboard(frames.get(i), (int) boardSize.width, (int) boardSize.height, imageCorners);
+            imagePoints.add(i, imageCorners);
+        }
         cameraMatrix = Mat.eye(3,3, CvType.CV_64F);
         distCoeffs = Mat.zeros(8,1, CvType.CV_64F);
         Calib3d.calibrateCamera(objectPoints, imagePoints, new Size(7,7), cameraMatrix, distCoeffs, rvecs, tvecs);
     }
 
     //TODO work here
-    private static List<Mat> calcBordCornerPoints(Size boardSize, float squareSize, MatOfPoint3f corners) {
+    private static List<Mat> calcBordCornerPoints(Size boardSize, float squareSize, MatOfPoint3f corners, int sampleSize) {
         for(int i=0; i < boardSize.height; i++) {
             for(int j=0;j < boardSize.width; j++) {
                 corners.push_back( new MatOfPoint3f(new Point3(j*squareSize, i*squareSize, 0f)));
             }
         }
-        ArrayList<Mat> out = new ArrayList<Mat>();
+        ArrayList<Mat> out = new ArrayList<Mat>(sampleSize);
 
-        for(int i=0;i < corners.width(); i++) {
-
+        for(int i=0;i < sampleSize; i++) {
+            out.add(corners.clone());
         }
 
         return out;
