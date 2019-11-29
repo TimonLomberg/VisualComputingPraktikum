@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import VisualComputingPraktikum.bildverarbeitung.CameraCalibrator;
+import VisualComputingPraktikum.bildverarbeitung.HoughCirclesRun;
 import org.opencv.core.CvException;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfInt;
@@ -166,7 +167,8 @@ public class VideoProcessing extends JFrame {
     	   //Imgproc.threshold(processedImage, processedImage, 127, 255,
     		//	   Imgproc.THRESH_BINARY);
 
-			processedImage = CameraCalibrator.detectAndDrawCorners(frame, 7,7);
+		   	processedImage = new HoughCirclesRun().HoughCircle(frame);
+			//processedImage = CameraCalibrator.detectAndDrawCorners(frame, 7,7);
 
     	   // Show processed image
     	   imgPanel2.setImage(Mat2BufferedImage(processedImage));
