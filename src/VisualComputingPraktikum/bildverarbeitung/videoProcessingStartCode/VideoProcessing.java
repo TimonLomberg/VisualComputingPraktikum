@@ -181,7 +181,8 @@ public class VideoProcessing extends JFrame {
     		//	   Imgproc.THRESH_BINARY);
 
 		   //processedImage = Shape.shapeDetection(frame);
-		   //processedImage = new HoughCirclesRun().HoughCircle(frame);
+		   //processedImage = HoughCirclesRun().HoughCircle(frame);
+		   //processedImage = Tracking.positionCircle(frame);
 		   //processedImage = CameraCalibrator.detectAndDrawCorners(frame, 7,7);
 
 
