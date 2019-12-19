@@ -39,18 +39,18 @@ public class Tracking {
             //Imgproc.circle(image, center, radius, new Scalar(255, 0, 255), 3, 8, 0);
             count++;
 
-            for(int i = 0; i <= count; i++) {
+            for (int i = 0; i <= count; i++) {
                 Color colorCircle = new Color(result.getRGB((int) center.x, (int) center.y));
-                if (colorCircle.getGreen() > 150 && colorCircle.getRed() == 0 && colorCircle.getBlue() >= 58) {   //Farbwerte anpassen
+                if (colorCircle.getGreen() > 160 && colorCircle.getRed() == 0 && colorCircle.getBlue() >= 115) {
                     Imgproc.circle(image, center, radius, new Scalar(255, 0, 255), 3, 8, 0);
                     System.out.println("Grün");
-                } else if (colorCircle.getRed() > 227 && colorCircle.getBlue() >= 19 && colorCircle.getGreen() >= 6) {
+                } else if (colorCircle.getRed() > 250 && colorCircle.getBlue() ==0 && colorCircle.getGreen() >= 20) {
                     Imgproc.circle(image, center, radius, new Scalar(255, 0, 255), 3, 8, 0);
                     System.out.println("Rot");
-                } else if (colorCircle.getBlue() == 0 && colorCircle.getRed() == 255 && colorCircle.getGreen() >= 222) {
+                } else if (colorCircle.getBlue() >= 155 && colorCircle.getRed() == 255 && colorCircle.getGreen() >= 24) {
                     Imgproc.circle(image, center, radius, new Scalar(255, 0, 255), 3, 8, 0);
-                    System.out.println("Gelb");
-                } else if (colorCircle.getBlue() == 0 && colorCircle.getGreen() == 0 && colorCircle.getRed() == 0) {
+                    System.out.println("Pink");
+                } else if (colorCircle.getBlue() >=50 && colorCircle.getGreen() >= 27 && colorCircle.getRed() >= 45) {
                     Imgproc.circle(image, center, radius, new Scalar(255, 0, 255), 3, 8, 0);
                     System.out.println("Schwarz");
                     //matrix.add(center);
