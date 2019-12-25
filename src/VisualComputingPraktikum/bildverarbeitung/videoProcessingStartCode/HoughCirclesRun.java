@@ -6,12 +6,17 @@ import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.core.*;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
 public class HoughCirclesRun {  //farbe anpassen, größe anpassen
 
 
     public static Mat HoughCircle (Mat image) {
 
         Mat gray = new Mat();
+        BufferedImage result = Tracking.Mat2BufferedImage(image);
+        int count = 0;
 
         Imgproc.cvtColor(image, gray, Imgproc.COLOR_BGR2GRAY);
         Imgproc.medianBlur(gray, gray, 5);
@@ -29,8 +34,17 @@ public class HoughCirclesRun {  //farbe anpassen, größe anpassen
             // circle outline
             int radius = (int) Math.round(c[2]);
             Imgproc.circle(image, center, radius, new Scalar(255, 0, 255), 3, 8, 0);
+            count++;
+
+            for (int i = 0; i <= count; i++) {
+                Color colorCircle = new Color(result.getRGB((int) center.x, (int) center.y));
+                if (colorCircle.getGreen() >= 240 && colorCircle.getRed() >= 80 && colorCircle.getRed() <= 110 && colorCircle.getBlue() == 255) {
+                    Imgproc.circle(image, center, radius, new Scalar(255, 0, 255), 3, 8, 0);
+                    System.out.println("Kreis");
+                    ImageProcessing.haupt("resources/images/sleep.jpg");
+                }
+            }
         }
-        System.out.println("Kreis");
 
         return image;
 
