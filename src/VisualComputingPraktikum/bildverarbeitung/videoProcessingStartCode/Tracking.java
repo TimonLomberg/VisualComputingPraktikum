@@ -1,13 +1,17 @@
 package VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode;
 
-import org.opencv.core.Mat;
+import VisualComputingPraktikum.bildverarbeitung.CameraCalibrator;
+import org.opencv.calib3d.Calib3d;
+import org.opencv.core.*;
 import org.opencv.core.Point;
-import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
+import org.opencv.utils.Converters;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Tracking {
 
@@ -53,13 +57,9 @@ public class Tracking {
                 } else if (colorCircle.getBlue() >=50 && colorCircle.getGreen() >= 27 && colorCircle.getRed() >= 45) {
                     Imgproc.circle(image, center, radius, new Scalar(255, 0, 255), 3, 8, 0);
                     System.out.println("Schwarz");
-                    //matrix.add(center);
+
                 }
             }
-            //Mat CameraMatrix = Mat(3, 3, CV_64FC1, cameraM);
-            //Calib3d.calibrateCamera()
-
-
         }
         return image;
     }

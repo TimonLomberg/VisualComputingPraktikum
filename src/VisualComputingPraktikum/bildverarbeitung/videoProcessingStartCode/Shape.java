@@ -2,8 +2,12 @@ package VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode;
 
 import VisualComputingPraktikum.bildverarbeitung.CameraCalibrator;
 import org.opencv.core.*;
+import org.opencv.core.Point;
 import org.opencv.imgproc.Imgproc;
+import org.opencv.imgproc.Moments;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +20,10 @@ public class Shape {
         Mat img = new Mat(blurred.size(), CvType.CV_8U);
 
         Imgproc.cvtColor(image, img, Imgproc.COLOR_RGB2HSV);
-        Core.inRange(image, new Scalar(100,40,40), new Scalar(240,100,110), img); //100,40,40), new Scalar (240,100,110)  227,6,29  (image, new Scalar(80,100,100), new Scalar(180,255,255), gray)
-        //Imgproc.cvtColor(image, gray, Imgproc.COLOR_RGBA2RGB );
-        //Core.inRange(image, new Scalar (100,0,0), new Scalar(250,100,250), gray);
-        Imgproc.erode(img, img, new Mat());
+        Core.inRange(image, new Scalar(200,60,60), new Scalar(250,180,180), img); //100,40,40), new Scalar (240,100,110)  abends:new Scalar(250,240,120), new Scalar(255,255,190)
+        //Imgproc.cvtColor(image, img, Imgproc.COLOR_RGBA2RGB );
+        //Core.inRange(image, new Scalar (100,0,0), new Scalar(250,100,250), img);
+        //sImgproc.erode(img, img, new Mat());
 
         Mat thresh = new Mat();
 
@@ -45,34 +49,57 @@ public class Shape {
 
             MatOfPoint2f approx = new MatOfPoint2f();
             MatOfPoint2f temp = new MatOfPoint2f(contour.toArray());
+            BufferedImage result = Tracking.Mat2BufferedImage(image);
 
             Imgproc.approxPolyDP(temp, approx, Imgproc.arcLength(temp, true) * 0.02, true);
+            Point center = massCenterMatOfPoint2f(approx);
+            int colorCount = 0;
+
 
             long count = approx.total();
             if (count == 4) {
-                System.out.println(count);
-                System.out.println("Viereck");
+                //System.out.println(count);
+                //System.out.println("Viereck");
                 Imgproc.drawContours(image, contours, -1, new Scalar(255, 0, 0), 8);
 
-                ImageProcessing.haupt("images/wallOfThornes.jpg");
+                for (int i = 0; i <= colorCount; i++) {
+                    Color color = new Color(result.getRGB((int) center.x, (int) center.y));
+                    if (color.getGreen() >= 110 && color.getRed() >= 50 && color.getBlue() == 255) {
+                        System.out.println("Viereck");
+                        ImageProcessing.haupt("resources/images/wallOfThorns.jpg");
+                    }
+                }
+
 
             } else if (count == 3) {
                 System.out.println(count);
-                System.out.println("Dreieck");
                 Imgproc.drawContours(image, contours, -1, new Scalar(255, 0, 0), 8);
 
-                ImageProcessing.haupt("images/raiseDead.jpg");
+                for (int i = 0; i <= colorCount; i++) {
+                    Color color = new Color(result.getRGB((int) center.x, (int) center.y));
+                    if (color.getGreen() >= 110 && color.getRed() >= 50 && color.getBlue() == 255) {
+                        System.out.println("Dreieck");
+                        ImageProcessing.haupt("resources/images/raiseDead.jpg");
+                    }
 
+                }
 
             } else {
                 HoughCirclesRun.HoughCircle(image);
                 System.out.println(count);
-
-                ImageProcessing.haupt("images/sleep.jpg");
             }
+
 
         }
 
-        return thresh;
+        return image;
+    }
+
+    private static Point massCenterMatOfPoint2f(MatOfPoint2f map) {
+        final Moments moments = Imgproc.moments(map);
+        final Point centroid = new Point();
+        centroid.x = moments.get_m10() / moments.get_m00();
+        centroid.y = moments.get_m01() / moments.get_m00();
+        return centroid;
     }
 }
