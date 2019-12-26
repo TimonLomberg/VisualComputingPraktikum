@@ -38,7 +38,11 @@ public class HoughCirclesRun {  //farbe anpassen, größe anpassen
 
             for (int i = 0; i <= count; i++) {
                 Color colorCircle = new Color(result.getRGB((int) center.x, (int) center.y));
-                if (colorCircle.getGreen() >= 240 && colorCircle.getRed() >= 80 && colorCircle.getRed() <= 110 && colorCircle.getBlue() == 255) {
+                /*System.out.println(colorCircle.getRed() + "rot");
+                System.out.println(colorCircle.getGreen() + "grün");
+                System.out.println(colorCircle.getBlue() + "blau");*/
+                if (colorCircle.getGreen() >= 110 && colorCircle.getRed() >= 50 && colorCircle.getBlue() == 255) { //abends:                 if (colorCircle.getGreen() >= 240 && colorCircle.getRed() >= 80 && colorCircle.getRed() <= 110 && colorCircle.getBlue() == 255) {
+
                     Imgproc.circle(image, center, radius, new Scalar(255, 0, 255), 3, 8, 0);
                     System.out.println("Kreis");
                     ImageProcessing.haupt("resources/images/sleep.jpg");

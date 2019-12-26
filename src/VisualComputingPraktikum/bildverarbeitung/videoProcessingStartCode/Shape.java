@@ -20,7 +20,7 @@ public class Shape {
         Mat img = new Mat(blurred.size(), CvType.CV_8U);
 
         Imgproc.cvtColor(image, img, Imgproc.COLOR_RGB2HSV);
-        Core.inRange(image, new Scalar(250,240,120), new Scalar(255,255,190), img); //100,40,40), new Scalar (240,100,110)  227,6,29  (image, new Scalar(80,100,100), new Scalar(180,255,255), gray)
+        Core.inRange(image, new Scalar(200,60,60), new Scalar(250,180,180), img); //100,40,40), new Scalar (240,100,110)  abends:new Scalar(250,240,120), new Scalar(255,255,190)
         //Imgproc.cvtColor(image, img, Imgproc.COLOR_RGBA2RGB );
         //Core.inRange(image, new Scalar (100,0,0), new Scalar(250,100,250), img);
         //sImgproc.erode(img, img, new Mat());
@@ -64,9 +64,9 @@ public class Shape {
 
                 for (int i = 0; i <= colorCount; i++) {
                     Color color = new Color(result.getRGB((int) center.x, (int) center.y));
-                    if (color.getGreen() >= 240 && color.getRed() >= 80 && color.getRed() <= 110 && color.getBlue() == 255) {
+                    if (color.getGreen() >= 110 && color.getRed() >= 50 && color.getBlue() == 255) {
                         System.out.println("Viereck");
-                        ImageProcessing.haupt("resources/images/walOfThornesjpg");
+                        ImageProcessing.haupt("resources/images/wallOfThorns.jpg");
                     }
                 }
 
@@ -77,7 +77,7 @@ public class Shape {
 
                 for (int i = 0; i <= colorCount; i++) {
                     Color color = new Color(result.getRGB((int) center.x, (int) center.y));
-                    if (color.getGreen() >= 240 && color.getRed() >= 80 && color.getRed() <= 110 && color.getBlue() == 255) {
+                    if (color.getGreen() >= 110 && color.getRed() >= 50 && color.getBlue() == 255) {
                         System.out.println("Dreieck");
                         ImageProcessing.haupt("resources/images/raiseDead.jpg");
                     }
