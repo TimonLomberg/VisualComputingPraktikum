@@ -65,7 +65,7 @@ public class CameraCalibrator {
     }
 
     //TODO work here
-    public static void calibrate(@NotNull ArrayList<Mat> frames,@NotNull int sampleSize,@NotNull Size boardSize,@NotNull float squareSize, List<Mat> objectPoints, List<Mat> imagePoints, Mat cameraMatrix, Mat distCoeffs, List<Mat> rvecs, List<Mat> tvecs) {
+    public static void calibrate(@NotNull Size camSize, @NotNull ArrayList<Mat> frames,@NotNull int sampleSize,@NotNull Size boardSize,@NotNull float squareSize, List<Mat> objectPoints, List<Mat> imagePoints, Mat cameraMatrix, Mat distCoeffs, List<Mat> rvecs, List<Mat> tvecs) {
 
 
         MatOfPoint3f objectCorners = new MatOfPoint3f();
@@ -78,7 +78,7 @@ public class CameraCalibrator {
         }
         cameraMatrix = Mat.eye(3,3, CvType.CV_64F);
         distCoeffs = Mat.zeros(8,1, CvType.CV_64F);
-        Calib3d.calibrateCamera(objectPoints, imagePoints, new Size(7,7), cameraMatrix, distCoeffs, rvecs, tvecs);
+        Calib3d.calibrateCamera(objectPoints, imagePoints, camSize, cameraMatrix, distCoeffs, rvecs, tvecs);
     }
 
     //TODO work here
