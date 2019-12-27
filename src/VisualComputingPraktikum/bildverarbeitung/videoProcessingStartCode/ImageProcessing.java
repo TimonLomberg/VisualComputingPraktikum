@@ -26,7 +26,7 @@ import org.opencv.imgproc.Imgproc;
  * displays the original and resulting image and
  * saves the processed image to a new file.
  *
- * @author Karsten Lehn modified by Merijam Gotzes
+ * @author Karsten Lehn modified by Merijam Gotzes / modified by Maike Leonie Huster
  * @version 1.9.2016, 01.10.2019
  *
  */

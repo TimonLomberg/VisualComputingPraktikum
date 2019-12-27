@@ -1,17 +1,21 @@
 package VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode;
 
-import VisualComputingPraktikum.bildverarbeitung.CameraCalibrator;
-import org.opencv.calib3d.Calib3d;
-import org.opencv.core.*;
+import org.opencv.core.Mat;
 import org.opencv.core.Point;
+import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
-import org.opencv.utils.Converters;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
-import java.util.ArrayList;
-import java.util.List;
+
+/**
+ *
+ * @author Maike Leonie Huster
+ *
+ * Searchs for circles in a gray image and gets the x and y value
+ *
+ */
 
 public class Tracking {
 
