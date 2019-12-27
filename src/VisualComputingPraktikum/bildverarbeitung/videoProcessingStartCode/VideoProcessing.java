@@ -194,7 +194,7 @@ public class VideoProcessing extends JFrame {
 				Mat distCoeffs = new Mat();
 				List<Mat> rvecs = new ArrayList<Mat>();
 				List<Mat> tvecs = new ArrayList<Mat>();
-				CameraCalibrator.calibrate(collectedFrames, calibSampleSize, boardSize, squareSize, objectPoints, imagePoints, cameraMatrix, distCoeffs, rvecs, tvecs, frame);
+				CameraCalibrator.calibrate(processedImage.size(), collectedFrames, calibSampleSize, boardSize, squareSize, objectPoints, imagePoints, cameraMatrix, distCoeffs, rvecs, tvecs);
 
 				System.out.println("" + cameraMatrix);
 			}

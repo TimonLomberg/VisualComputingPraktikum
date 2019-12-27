@@ -16,6 +16,9 @@
           <root url="jar://$MODULE_DIR$/dependencies/opengl/jogamp-all-platforms/jar/gluegen.jar!/" />
         </CLASSES>
         <JAVADOC />
+        <NATIVE>
+          <root url="file://$MODULE_DIR$/dependencies/opengl/jogamp-all-platforms/lib/windows-amd64" />
+        </NATIVE>
         <SOURCES />
       </library>
     </orderEntry>
@@ -56,15 +59,6 @@
           <root url="jar://D:/OtherInstallations/OpenCV/opencv/build/java/opencv-411.jar!/" />
           <root url="jar://$MODULE_DIR$/../../opencv/build/java/opencv-411.jar!/" />
         </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/annotations/17.0.0/annotations-17.0.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">

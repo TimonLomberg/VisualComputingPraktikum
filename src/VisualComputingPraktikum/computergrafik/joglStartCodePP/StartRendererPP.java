@@ -62,7 +62,7 @@ public class StartRendererPP extends GLCanvas implements GLEventListener {
 
     private static final long serialVersionUID = 1L;
     // Defining shader source code file paths and names
-    final String shaderPath = ".\\resources\\";
+    final String shaderPath = ".\\resources\\shader\\";
     final String vertexShaderFileName = "Basic.vert";
     final String fragmentShaderFileName = "Basic.frag";
 //    final String vertexShaderFileName = "BasicMacOS.vert";
