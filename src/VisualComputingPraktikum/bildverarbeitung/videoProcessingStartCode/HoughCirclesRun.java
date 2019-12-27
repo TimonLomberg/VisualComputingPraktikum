@@ -4,12 +4,17 @@ import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
-import org.opencv.core.*;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class HoughCirclesRun {  //farbe anpassen, größe anpassen
+/**
+ *
+ * @author Maike Leonie Huster
+ * Searches for circles in a gray Image using HoughCircles
+ *
+ */
+
+public class HoughCirclesRun {
 
 
     public static Mat HoughCircle (Mat image) {
@@ -21,9 +26,8 @@ public class HoughCirclesRun {  //farbe anpassen, größe anpassen
         Imgproc.cvtColor(image, gray, Imgproc.COLOR_BGR2GRAY);
         Imgproc.medianBlur(gray, gray, 5);
         Mat circles = new Mat();
-        Imgproc.HoughCircles(gray, circles, Imgproc.HOUGH_GRADIENT, 1.0, (double) gray.rows() / 16, // change this value to detect circles with different distances to each other
-                100.0, 30.0, 1, 15); // change the last two parameters
-        // (min_radius & max_radius) to detect larger circles
+        Imgproc.HoughCircles(gray, circles, Imgproc.HOUGH_GRADIENT, 1.0, (double) gray.rows() / 16,
+                100.0, 30.0, 1, 15);
 
 
         for (int x = 0; x < circles.cols(); x++) {

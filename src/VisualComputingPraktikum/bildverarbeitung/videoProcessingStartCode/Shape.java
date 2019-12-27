@@ -1,15 +1,22 @@
 package VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode;
 
-import VisualComputingPraktikum.bildverarbeitung.CameraCalibrator;
-import org.opencv.core.*;
 import org.opencv.core.Point;
+import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.imgproc.Moments;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ *
+ * @author Maike Leonie Huster
+ *
+ * Searches for shapes in an image (square, triangle,circle)
+ * using the method findContours
+ *
+ */
 
 public class Shape {
 
