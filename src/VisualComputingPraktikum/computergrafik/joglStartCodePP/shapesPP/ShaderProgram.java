@@ -189,4 +189,21 @@ public class ShaderProgram {
         }
         return fileContent;
     }
+
+    public void use() {
+        gl.glUseProgram(shaderProgramID);
+    }
+
+    public void setBool(String name, boolean value) {
+        if (value)
+            gl.glUniform1i(gl.glGetUniformLocation(shaderProgramID, name), 1);
+        else
+            gl.glUniform1i(gl.glGetUniformLocation(shaderProgramID, name), 0);
+    }
+    public  void setInt(String name, int value) {
+        gl.glUniform1i(gl.glGetUniformLocation(shaderProgramID, name), value);
+    }
+    public  void setFloat(String name, float value) {
+        gl.glUniform1f(gl.glGetUniformLocation(shaderProgramID, name), value);
+    }
 }

@@ -64,7 +64,7 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
     private final String shaderPath = ".\\.\\resources\\shader\\";
     // Shader for object 0
     private final String vertexShader0FileName = "O0_Basic.vert";
-    private final String fragmentShader0FileName = "O0_Basic.frag";
+    private final String fragmentShader0FileName = "Ambient.frag";
     // Shader for object 1
     private final String vertexShader1FileName = "O1_Basic.vert";
     private final String fragmentShader1FileName = "O1_Basic.frag";
@@ -96,6 +96,11 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
     private InteractionHandler interactionHandler;
     // Projection model view matrix tool
     private PMVMatrix pmvMatrix;
+
+    float[] object0Color = {0.1f, 0.1f, 0.8f};
+    public FloatBuffer color0Buffer = FloatBuffer.wrap(object0Color);
+    float[] object0LightColor = {1f, 1f, 1f};
+    public FloatBuffer lightColor0Buffer = FloatBuffer.wrap(object0LightColor);
 
     /**
      * Standard constructor for object creation.
@@ -193,8 +198,8 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
         gl.glEnable(GL.GL_DEPTH_TEST);
 
         // defining polygon drawing mode
-//        gl.glPolygonMode(GL.GL_FRONT_AND_BACK, gl.GL_FILL);
-        gl.glPolygonMode(GL.GL_FRONT_AND_BACK, gl.GL_LINE);
+        gl.glPolygonMode(GL.GL_FRONT_AND_BACK, gl.GL_FILL);
+//        gl.glPolygonMode(GL.GL_FRONT_AND_BACK, gl.GL_LINE);
 
         // Create projection-model-view matrix
         pmvMatrix = new PMVMatrix();
@@ -218,6 +223,8 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
                 vertexShader0FileName, fragmentShader0FileName);
 
         float[] color0 = {0.8f, 0.1f, 0.1f};
+        int paraLoc = gl.glGetUniformLocation(shaderProgram0.getShaderProgramID(), "objectColor");
+
         sphere0 = new Sphere(64, 64);
         float[] sphereVertices = sphere0.makeVertices(0.5f, color0);
         int[] sphereIndices = sphere0.makeIndicesForTriangleStrip();
@@ -432,18 +439,20 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
     }
 
     private void displayObject0(GL3 gl) {
-        gl.glUseProgram(shaderProgram0.getShaderProgramID());
+        shaderProgram0.use();
         // Transfer the PVM-Matrix (model-view and projection matrix)
         // to the vertex shader
         gl.glUniformMatrix4fv(0, 1, false, pmvMatrix.glGetPMatrixf());
         gl.glUniformMatrix4fv(1, 1, false, pmvMatrix.glGetMvMatrixf());
+        gl.glUniform3fv(shaderProgram0.getShaderProgramID(), 1 , color0Buffer);
+        gl.glUniform3fv(shaderProgram0.getShaderProgramID(), 1 , lightColor0Buffer);
         gl.glBindVertexArray(vaoName[0]);
         // Draws the elements in the order defined by the index buffer object (IBO)
         gl.glDrawElements(GL.GL_TRIANGLE_STRIP, sphere0.getNoOfIndices(), GL.GL_UNSIGNED_INT, 0);
     }
 
     private void displayObject1(GL3 gl) {
-        gl.glUseProgram(shaderProgram1.getShaderProgramID());
+       shaderProgram1.use();
         // Transfer the PVM-Matrix (model-view and projection matrix) to the vertex shader
         gl.glUniformMatrix4fv(0, 1, false, pmvMatrix.glGetPMatrixf());
         gl.glUniformMatrix4fv(1, 1, false, pmvMatrix.glGetMvMatrixf());
