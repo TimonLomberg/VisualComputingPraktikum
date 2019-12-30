@@ -78,6 +78,11 @@ public class CameraCalibrator {
         }
         cameraMatrix = Mat.eye(3,3, CvType.CV_64F);
         distCoeffs = Mat.zeros(8,1, CvType.CV_64F);
+
+        if (!(imagePoints.size() == objectPoints.size())) {
+            System.out.println("imagePoints.size() and objectPoints.size() and imagePoints[i].size() must be equal to objectPoints[i].size() for each i.");
+        }
+
         Calib3d.calibrateCamera(objectPoints, imagePoints, camSize, cameraMatrix, distCoeffs, rvecs, tvecs);
     }
 
