@@ -6,9 +6,7 @@ import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Vector;
 
 enum Modes { CAPTURING, DETECTION, CALIBRATED}
 
@@ -83,7 +81,13 @@ public class CameraCalibrator {
             System.err.println("imagePoints.size() and objectPoints.size() and imagePoints[i].size() must be equal to objectPoints[i].size() for each i.");
         }
 
-        Calib3d.calibrateCamera(objectPoints, imagePoints, camSize, cameraMatrix, distCoeffs, rvecs, tvecs);
+        try {
+            Calib3d.calibrateCamera(objectPoints, imagePoints, camSize, cameraMatrix, distCoeffs, rvecs, tvecs);
+        } catch (Exception e) {
+            System.err.println("[Warning]:  Calibration unseccessfull");
+        }
+
+
     }
 
     //TODO work here
