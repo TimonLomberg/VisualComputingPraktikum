@@ -196,7 +196,7 @@ public class VideoProcessing extends JFrame {
 				List<Mat> tvecs = new ArrayList<Mat>();
 				CameraCalibrator.calibrate(processedImage.size(), collectedFrames, calibSampleSize, boardSize, squareSize, objectPoints, imagePoints, cameraMatrix, distCoeffs, rvecs, tvecs);
 
-				System.out.println("" + cameraMatrix);
+				System.out.println("" + cameraMatrix + " end matrix");
 			}
 
 
@@ -249,6 +249,7 @@ public class VideoProcessing extends JFrame {
     private boolean collectFrames(int sampleSize, Mat frame, List<Mat> imageList) {
     	if(! (samplesCollected >= sampleSize)) {
     		imageList.add(frame);
+    		System.out.println("Collected" + imageList.size() + "frames.");
     		return false;
 		} else return true;
 	}
