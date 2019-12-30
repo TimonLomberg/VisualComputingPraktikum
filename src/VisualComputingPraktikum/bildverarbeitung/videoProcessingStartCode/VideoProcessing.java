@@ -250,7 +250,7 @@ public class VideoProcessing extends JFrame {
     private boolean collectFrames(int sampleSize, Mat frame, List<Mat> imageList) {
     	if(! (samplesCollected >= sampleSize)) {
     		imageList.add(frame);
-    		System.out.println("Collected" + imageList.size() + "frames.");
+    		System.out.println("Collected" + imageList.size() + "frames. " +  imageList.size() +" < " + sampleSize);
     		return false;
 		} else {
     		return true;
