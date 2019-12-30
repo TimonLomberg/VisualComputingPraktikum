@@ -1,30 +1,22 @@
 package VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.imageio.ImageIO;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import VisualComputingPraktikum.bildverarbeitung.CameraCalibrator;
-//import VisualComputingPraktikum.bildverarbeitung.HoughCirclesRun;
 import org.opencv.core.CvException;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfInt;
 import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
-import org.opencv.videoio.Videoio;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+//import VisualComputingPraktikum.bildverarbeitung.HoughCirclesRun;
 
 /**
  * Simple application, that opens a video stream
@@ -194,7 +186,12 @@ public class VideoProcessing extends JFrame {
 				Mat distCoeffs = new Mat();
 				List<Mat> rvecs = new ArrayList<Mat>();
 				List<Mat> tvecs = new ArrayList<Mat>();
-				CameraCalibrator.calibrate(processedImage.size(), collectedFrames, calibSampleSize, boardSize, squareSize, objectPoints, imagePoints, cameraMatrix, distCoeffs, rvecs, tvecs);
+				try {
+					CameraCalibrator.calibrate(processedImage.size(), collectedFrames, calibSampleSize, boardSize, squareSize, objectPoints, imagePoints, cameraMatrix, distCoeffs, rvecs, tvecs);
+				} catch (Exception e) {
+					System.err.println("[Warning]:  Calibration unseccessfull");
+				}
+
 
 				collectedFrames.clear();
 				System.out.println("" + cameraMatrix + " end matrix");

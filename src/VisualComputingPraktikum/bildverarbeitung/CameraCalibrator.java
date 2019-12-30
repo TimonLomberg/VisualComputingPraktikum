@@ -81,11 +81,9 @@ public class CameraCalibrator {
             System.err.println("imagePoints.size() and objectPoints.size() and imagePoints[i].size() must be equal to objectPoints[i].size() for each i.");
         }
 
-        try {
+
             Calib3d.calibrateCamera(objectPoints, imagePoints, camSize, cameraMatrix, distCoeffs, rvecs, tvecs);
-        } catch (Exception e) {
-            System.err.println("[Warning]:  Calibration unseccessfull");
-        }
+
 
 
     }
