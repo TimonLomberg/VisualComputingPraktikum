@@ -1,13 +1,23 @@
 package VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode;
 
-import org.opencv.core.Mat;
+import aruco.DetectorParameters;
+import org.opencv.calib3d.Calib3d;
 import org.opencv.core.Point;
-import org.opencv.core.Scalar;
+import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
+import org.opencv.videoio.VideoCapture;
+import  org.opencv.core.CvType;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.List;
+import java.util.Vector;
+
+import static org.opencv.imgproc.Imgproc.contourArea;
+
 
 /**
  *
@@ -20,10 +30,14 @@ import java.awt.image.DataBufferByte;
 public class Tracking {
 
 
+    public static final double RADIUS_OF_MARKER = 2.65;
+    public static final double FOCAL_LENGTH = 320.8301965245661; //focal length in pixels
+    final int DISTANCE_TO_OBJECT = 109;
+
+
+
     public static Mat positionCircle (Mat image) {
 
-        int wight = image.width();
-        int height = image.height();
         BufferedImage result = Mat2BufferedImage(image);
         Mat gray = new Mat();
         int count = 0;
@@ -39,33 +53,64 @@ public class Tracking {
 
 
             double[] c = circles.get(0, x);
-            Point center = new Point(Math.round(c[0]), Math.round(c[1]));
+            Point center = new Point(c[0], c[1]);
             // circle center
             //Imgproc.circle(image, center, 1, new Scalar(0, 100, 100), 3, 8, 0);
             // circle outline
-            int radius = (int) Math.round(c[2]);
+            double radius = c[2]; //Math.round(c[2]);
             //Imgproc.circle(image, center, radius, new Scalar(255, 0, 255), 3, 8, 0);
             count++;
+
 
             for (int i = 0; i <= count; i++) {
                 Color colorCircle = new Color(result.getRGB((int) center.x, (int) center.y));
                 if (colorCircle.getGreen() > 160 && colorCircle.getRed() == 0 && colorCircle.getBlue() >= 115) {
-                    Imgproc.circle(image, center, radius, new Scalar(255, 0, 255), 3, 8, 0);
+                    Imgproc.circle(image, center, (int) radius, new Scalar(255, 0, 255), 3, 8, 0);
                     System.out.println("Grün");
+
+                    double centerZ = distanceMeasure(RADIUS_OF_MARKER, FOCAL_LENGTH, radius);
+
+                    MatOfPoint3f objPoints = new MatOfPoint3f();
+                    objPoints.push_back( new MatOfPoint3f(new Point3(center.x, center.y, centerZ)));
+
                 } else if (colorCircle.getRed() > 250 && colorCircle.getBlue() ==0 && colorCircle.getGreen() >= 20) {
-                    Imgproc.circle(image, center, radius, new Scalar(255, 0, 255), 3, 8, 0);
+                    Imgproc.circle(image, center, (int)radius, new Scalar(255, 0, 255), 3, 8, 0);
                     System.out.println("Rot");
+
+                    double centerZ = distanceMeasure(RADIUS_OF_MARKER, FOCAL_LENGTH, radius);
+
+                    MatOfPoint3f objPoints = new MatOfPoint3f();
+                    objPoints.push_back( new MatOfPoint3f(new Point3(center.x, center.y, centerZ)));
+
                 } else if (colorCircle.getBlue() >= 155 && colorCircle.getRed() == 255 && colorCircle.getGreen() >= 24) {
-                    Imgproc.circle(image, center, radius, new Scalar(255, 0, 255), 3, 8, 0);
+                    Imgproc.circle(image, center,(int) radius, new Scalar(255, 0, 255), 3, 8, 0);
                     System.out.println("Pink");
+
+                    double centerZ = distanceMeasure(RADIUS_OF_MARKER, FOCAL_LENGTH, radius);
+
+                    MatOfPoint3f objPoints = new MatOfPoint3f();
+                    objPoints.push_back( new MatOfPoint3f(new Point3(center.x, center.y, centerZ)));
+
                 } else if (colorCircle.getBlue() >=50 && colorCircle.getGreen() >= 27 && colorCircle.getRed() >= 45) {
-                    Imgproc.circle(image, center, radius, new Scalar(255, 0, 255), 3, 8, 0);
+                    Imgproc.circle(image, center, (int)radius, new Scalar(255, 0, 255), 3, 8, 0);
                     System.out.println("Schwarz");
+
+                    double centerZ = distanceMeasure(RADIUS_OF_MARKER, FOCAL_LENGTH, radius);
+
+                    MatOfPoint3f objPoints = new MatOfPoint3f();
+                    objPoints.push_back( new MatOfPoint3f(new Point3(center.x, center.y, centerZ)));
 
                 }
             }
         }
         return image;
+    }
+
+    public static double distanceMeasure (double RADIUS_OF_MARKER, double FOCAL_LENGTH, double radius){
+        double centerZ = ((RADIUS_OF_MARKER *FOCAL_LENGTH) / radius) +5;
+        System.out.println("Distance in cm: " + centerZ);
+
+        return  centerZ;
     }
 
 
@@ -86,4 +131,6 @@ public class Tracking {
         imgMat.get(0, 0, bufferedImageBuffer);
         return bufferedImage;
     }
-}
+
+    }
+
