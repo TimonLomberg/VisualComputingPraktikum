@@ -191,6 +191,7 @@ public class VideoProcessing extends JFrame {
 					success = true;
 				} catch (Exception e) {
 					System.err.println("[Warning]:  Calibration unseccessfull");
+					success = false;
 
 				}
 
