@@ -1,6 +1,5 @@
 package VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode;
 
-import aruco.DetectorParameters;
 import org.opencv.calib3d.Calib3d;
 import org.opencv.core.Point;
 import org.opencv.core.*;
