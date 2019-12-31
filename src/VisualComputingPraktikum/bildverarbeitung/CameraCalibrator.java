@@ -63,7 +63,7 @@ public class CameraCalibrator {
     }
 
     //TODO work here
-    public static void calibrate(@NotNull Size camSize, @NotNull ArrayList<Mat> frames,@NotNull int sampleSize,@NotNull Size boardSize,@NotNull float squareSize, List<Mat> objectPoints, List<Mat> imagePoints, Mat cameraMatrix, Mat distCoeffs, List<Mat> rvecs, List<Mat> tvecs) {
+    public static void calibrate(@NotNull Size camSize, @NotNull ArrayList<Mat> frames, int sampleSize, @NotNull Size boardSize, float squareSize, List<Mat> objectPoints, List<Mat> imagePoints, Mat cameraMatrix, Mat distCoeffs, List<Mat> rvecs, List<Mat> tvecs) {
 
 
         MatOfPoint3f objectCorners = new MatOfPoint3f();
@@ -103,4 +103,16 @@ public class CameraCalibrator {
 
         return out;
     }
+
+    public static void pnp(MatOfPoint3f objectPoints, MatOfPoint2f imagePoints, Mat cameraMatrix, MatOfDouble distCoeffs, Mat rvec, Mat tvec) {
+        Calib3d.solvePnP(objectPoints,imagePoints,cameraMatrix,distCoeffs,rvec,tvec);
+        Mat rotM = Mat.zeros(3, 3, CvType.CV_64F);
+        Calib3d.Rodrigues(rvec, rotM);
+        rotM.t();
+        tvec = rotM.inv().mul(tvec);
+
+        System.out.println("Camera position estimated as " + tvec + " with rotation " + rotM);
+    }
+
+
 }

@@ -1,11 +1,9 @@
 package VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode;
 
 import VisualComputingPraktikum.bildverarbeitung.CameraCalibrator;
-import org.opencv.core.CvException;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfInt;
-import org.opencv.core.Size;
+import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.utils.Converters;
 import org.opencv.videoio.VideoCapture;
 
 import javax.swing.*;
@@ -180,6 +178,8 @@ public class VideoProcessing extends JFrame {
 
 			if(collectFrames(calibSampleSize, frame, collectedFrames)) {
 
+				boolean success = false;
+
 				List<Mat> objectPoints = new ArrayList<Mat>();
 				List<Mat> imagePoints = new ArrayList<Mat>();
 				Mat cameraMatrix = new Mat();
@@ -188,8 +188,18 @@ public class VideoProcessing extends JFrame {
 				List<Mat> tvecs = new ArrayList<Mat>();
 				try {
 					CameraCalibrator.calibrate(processedImage.size(), collectedFrames, calibSampleSize, boardSize, squareSize, objectPoints, imagePoints, cameraMatrix, distCoeffs, rvecs, tvecs);
+					success = true;
 				} catch (Exception e) {
 					System.err.println("[Warning]:  Calibration unseccessfull");
+
+				}
+
+				if(success) {
+					ArrayList<MatOfPoint3f> objPoints = new ArrayList<MatOfPoint3f>();
+					ArrayList<MatOfPoint2f> imgPoints = new ArrayList<MatOfPoint2f>();
+					Converters.Mat_to_vector_vector_Point3f(objectPoints.get(0), objPoints);
+					Converters.Mat_to_vector_vector_Point2f(imagePoints.get(0), imgPoints);
+					CameraCalibrator.pnp(objPoints.get(0), imgPoints.get(0),cameraMatrix,new MatOfDouble(distCoeffs),rvecs.get(0),tvecs.get(0));
 				}
 
 
