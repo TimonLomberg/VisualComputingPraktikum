@@ -203,9 +203,9 @@ public class VideoProcessing extends JFrame {
 					CameraCalibrator.pnp(objPoints.get(0), imgPoints.get(0),cameraMatrix,new MatOfDouble(distCoeffs),rvecs.get(0),tvecs.get(0));
 
 					for (int y = 0; y < objectPoints.size();y++) {
-						if (objectPoints.get(0) != null) {
-							Converters.Mat_to_vector_vector_Point3f(objectPoints.get(0), objPoints);
-							Converters.Mat_to_vector_vector_Point2f(imagePoints.get(0), imgPoints);
+						if (objectPoints.get(y) != null) {
+							Converters.Mat_to_vector_vector_Point3f(objectPoints.get(y), objPoints);
+							Converters.Mat_to_vector_vector_Point2f(imagePoints.get(y), imgPoints);
 							break;
 						}
 
