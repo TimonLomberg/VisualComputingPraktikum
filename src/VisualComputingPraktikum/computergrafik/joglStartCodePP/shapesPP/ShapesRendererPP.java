@@ -419,14 +419,14 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
 
         if(!(Tracking.green.isEmpty())) {
             pmvMatrix.glPushMatrix();
-            pmvMatrix.glTranslatef((float) Tracking.green.get(0), (float) Tracking.green.get(1), (float) Tracking.green.get(2));
+            pmvMatrix.glTranslatef((float) Tracking.green.get(0), -(float) Tracking.green.get(1), -(float) Tracking.green.get(2));
             displayObject0(gl);
             pmvMatrix.glPopMatrix();
         }
 
         if(!(Tracking.red.isEmpty())) {
             pmvMatrix.glPushMatrix();
-            pmvMatrix.glTranslatef((float) Tracking.red.get(0), (float) Tracking.red.get(1), (float) Tracking.red.get(2));
+            pmvMatrix.glTranslatef((float) Tracking.red.get(0), -(float) Tracking.red.get(1), -(float) Tracking.red.get(2));
             pmvMatrix.glRotatef(45f, 0f, 1f, 0f);
             displayObject1(gl);
             pmvMatrix.glPopMatrix();
@@ -434,14 +434,14 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
 
         if(!(Tracking.pink.isEmpty())) {
         pmvMatrix.glPushMatrix();
-        pmvMatrix.glTranslatef(0f, -1f, 0f);
+        pmvMatrix.glTranslatef((float) Tracking.pink.get(0), -(float) Tracking.pink.get(1), -(float) Tracking.pink.get(2));
         displayObject2(gl);
         pmvMatrix.glPopMatrix();
         }
 
         if(!(Tracking.black.isEmpty())){
         pmvMatrix.glPushMatrix();
-        pmvMatrix.glTranslatef(1.5f, 0f, 0f);
+        pmvMatrix.glTranslatef((float) Tracking.black.get(0), -(float) Tracking.black.get(1), -(float) Tracking.black.get(2));
         displayObject3(gl);
         pmvMatrix.glPopMatrix();
         }
