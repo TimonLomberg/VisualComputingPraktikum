@@ -198,17 +198,18 @@ public class VideoProcessing extends JFrame {
 				if(success) {
 					ArrayList<MatOfPoint3f> objPoints = new ArrayList<MatOfPoint3f>();
 					ArrayList<MatOfPoint2f> imgPoints = new ArrayList<MatOfPoint2f>();
+					Converters.Mat_to_vector_vector_Point3f(objectPoints.get(0), objPoints);
+					Converters.Mat_to_vector_vector_Point2f(imagePoints.get(0), imgPoints);
 
-					for (int y = 0; y < objectPoints.size();y++) {
-						if (objectPoints.get(y) != null) {
-							Converters.Mat_to_vector_vector_Point3f(objectPoints.get(y), objPoints);
-							Converters.Mat_to_vector_vector_Point2f(imagePoints.get(y), imgPoints);
+					for (MatOfPoint3f objPoint : objPoints) {
+						if (objPoint != null) {
 
+							CameraCalibrator.pnp(objPoints.get(0), imgPoints.get(0), cameraMatrix, new MatOfDouble(distCoeffs), rvecs.get(0), tvecs.get(0));
 							break;
 						}
 
 					}
-					CameraCalibrator.pnp(objPoints.get(0), imgPoints.get(0),cameraMatrix,new MatOfDouble(distCoeffs),rvecs.get(0),tvecs.get(0));
+
 				}
 
 
