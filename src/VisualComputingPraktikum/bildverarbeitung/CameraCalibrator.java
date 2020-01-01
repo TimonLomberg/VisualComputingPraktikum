@@ -102,6 +102,19 @@ public class CameraCalibrator {
         }
         System.out.print("]");
 
+        System.out.print("ImagePoints are: [");
+        for(Mat point : imagePoints) {
+            System.out.print("--[");
+            for (int j=0;j<point.size().width;j++) {
+                for (int y=0;y<point.size().height;y++) {
+                    System.out.print(Arrays.toString(point.get(j, y)));
+                }
+            }
+            System.out.print("]--");
+
+        }
+        System.out.print("]");
+
 
             System.out.print("CameraMatrix is: [");
             for (int j=0;j<cameraMatrix.size().width;j++) {
