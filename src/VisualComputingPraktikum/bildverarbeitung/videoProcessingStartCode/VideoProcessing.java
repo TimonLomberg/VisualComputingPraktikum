@@ -229,7 +229,7 @@ public class VideoProcessing extends JFrame {
 
 					//for (int j = 0; j<objectPoints.get(0))
 
-						System.out.println(objectPoints.get(0) + "  |  " + objectPoints.get(1));
+						System.out.println(objectPoints.toString());
 
 					//CameraCalibrator.pnpGeneric(Converters.vector_Mat_to_Mat(objectPoints), Converters.vector_Mat_to_Mat(imagePoints),cameraMatrix,new MatOfDouble(distCoeffs),rvecs,tvecs);
 
