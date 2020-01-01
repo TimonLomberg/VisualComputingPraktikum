@@ -187,8 +187,8 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
         // Initialize objects to be drawn (see respective sub-methods)
         initObject0(gl);
         initObject1(gl);
-        //initObject2(gl);
-        //initObject3(gl);
+        initObject2(gl);
+        initObject3(gl);
         // END: Preparing scene
 
         // Switch on back face culling
@@ -206,7 +206,7 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
         pmvMatrix = new PMVMatrix();
 
         // Start parameter settings for the interaction handler might be called here
-        interactionHandler.setEyeZ(5.5f);
+        interactionHandler.setEyeZ(100f);
         // END: Preparing scene
     }
 
@@ -417,31 +417,32 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
         // Transform for the complete scene
 //        pmvMatrix.glTranslatef(1f, 0.2f, 0f);
 
-        if(!(Tracking.green.isEmpty())) {
+        if(Tracking.greenCenterX != 0) {
             pmvMatrix.glPushMatrix();
-            pmvMatrix.glTranslatef((float) Tracking.green.get(0), -(float) Tracking.green.get(1), -(float) Tracking.green.get(2));
+            pmvMatrix.glTranslatef((float) Tracking.greenCenterX/10, -(float) Tracking.greenCenterY/10, -(float) Tracking.greenCenterZ/10);
+            pmvMatrix.glTranslatef(-1f,0f, 0f);
             displayObject0(gl);
             pmvMatrix.glPopMatrix();
         }
 
-        if(!(Tracking.red.isEmpty())) {
+        if(Tracking.redCenterX != 0) {
             pmvMatrix.glPushMatrix();
-            pmvMatrix.glTranslatef((float) Tracking.red.get(0), -(float) Tracking.red.get(1), -(float) Tracking.red.get(2));
+            pmvMatrix.glTranslatef((float) Tracking.redCenterX/10, -(float) Tracking.redCenterY/10, -(float) Tracking.pinkCenterZ/10);
             pmvMatrix.glRotatef(45f, 0f, 1f, 0f);
             displayObject1(gl);
             pmvMatrix.glPopMatrix();
         }
 
-        if(!(Tracking.pink.isEmpty())) {
+        if(Tracking.pinkCenterX != 0) {
         pmvMatrix.glPushMatrix();
-        pmvMatrix.glTranslatef((float) Tracking.pink.get(0), -(float) Tracking.pink.get(1), -(float) Tracking.pink.get(2));
+        pmvMatrix.glTranslatef((float) Tracking.pinkCenterX/10, -(float) Tracking.pinkCenterY/10, -(float) Tracking.pinkCenterZ/10);
         displayObject2(gl);
         pmvMatrix.glPopMatrix();
         }
 
-        if(!(Tracking.black.isEmpty())){
+        if(Tracking.blackCenterX != 0){
         pmvMatrix.glPushMatrix();
-        pmvMatrix.glTranslatef((float) Tracking.black.get(0), -(float) Tracking.black.get(1), -(float) Tracking.black.get(2));
+        pmvMatrix.glTranslatef((float) Tracking.blackCenterX/10, -(float) Tracking.blackCenterY/10, -(float) Tracking.blackCenterZ/10);
         displayObject3(gl);
         pmvMatrix.glPopMatrix();
         }
