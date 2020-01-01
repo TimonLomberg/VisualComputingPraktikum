@@ -201,8 +201,12 @@ public class VideoProcessing extends JFrame {
 				}
 
 				if(success) {
+
+					/*
 					ArrayList<MatOfPoint3f> objPoints = new ArrayList<MatOfPoint3f>();
 					ArrayList<MatOfPoint2f> imgPoints = new ArrayList<MatOfPoint2f>();
+
+
 
 					for (int y = 0; y < objectPoints.size();y++) {
 						if (objectPoints.get(y) != null) {
@@ -217,6 +221,13 @@ public class VideoProcessing extends JFrame {
 						}
 
 					}
+
+
+					 */
+
+
+					;
+					CameraCalibrator.pnp(Converters.vector_Mat_to_Mat(objectPoints), Converters.vector_Mat_to_Mat(imagePoints),cameraMatrix,new MatOfDouble(distCoeffs),rvecs,tvecs);
 
 				}
 
