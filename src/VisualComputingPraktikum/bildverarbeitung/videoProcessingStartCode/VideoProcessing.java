@@ -170,9 +170,9 @@ public class VideoProcessing extends JFrame {
     	   //Imgproc.threshold(processedImage, processedImage, 127, 255,
     		//	   Imgproc.THRESH_BINARY);
 
-		   processedImage = Shape.shapeDetection(frame);
+		   //processedImage = Shape.shapeDetection(frame);
 		   //processedImage = HoughCirclesRun.HoughCircle(frame);
-		   //processedImage = Tracking.positionCircle(frame);
+		   processedImage = Tracking.positionCircle(frame);
 		   //processedImage = CameraCalibrator.detectAndDrawCorners(frame, 7,7);
 
 

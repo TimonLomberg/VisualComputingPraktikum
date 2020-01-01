@@ -1,5 +1,7 @@
 package VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode;
 
+import VisualComputingPraktikum.computergrafik.joglStartCodePP.shapesPP.ShapesMainWindowPP;
+import VisualComputingPraktikum.computergrafik.joglStartCodePP.shapesPP.ShapesRendererPP;
 import org.opencv.calib3d.Calib3d;
 import org.opencv.core.Point;
 import org.opencv.core.*;
@@ -22,7 +24,7 @@ import static org.opencv.imgproc.Imgproc.contourArea;
  *
  * @author Maike Leonie Huster
  *
- * Searchs for circles in a gray image and gets the x and y value
+ * Searchs for circles in a gray image and gets the x,y and z value
  *
  */
 
@@ -32,6 +34,16 @@ public class Tracking {
     public static final double RADIUS_OF_MARKER = 2.65;
     public static final double FOCAL_LENGTH = 320.8301965245661; //focal length in pixels
     final int DISTANCE_TO_OBJECT = 109;
+    public static double centerZ;
+    public static double centerX;
+    public static double centerY;
+
+    public static ArrayList green = new ArrayList();
+    public static ArrayList red = new ArrayList();
+    public static ArrayList pink= new ArrayList();
+    public static ArrayList black = new ArrayList();
+
+
 
 
 
@@ -67,7 +79,20 @@ public class Tracking {
                     Imgproc.circle(image, center, (int) radius, new Scalar(255, 0, 255), 3, 8, 0);
                     System.out.println("Grün");
 
-                    double centerZ = distanceMeasure(RADIUS_OF_MARKER, FOCAL_LENGTH, radius);
+                    centerX = center.x;
+                    centerY = center.y;
+                    centerZ = distanceMeasure(RADIUS_OF_MARKER, FOCAL_LENGTH, radius);
+
+                    Mat gr = new Mat();
+                    gr.put(0,0,centerX);
+                    gr.put(1,0,centerY);
+                    gr.put(2,0,centerZ);
+                    gr.inv();
+
+                    green.add(gr.get(0,0));
+                    green.add(gr.get(1,0));
+                    green.add(gr.get(2,0));
+
 
                     MatOfPoint3f objPoints = new MatOfPoint3f();
                     objPoints.push_back( new MatOfPoint3f(new Point3(center.x, center.y, centerZ)));
@@ -76,7 +101,14 @@ public class Tracking {
                     Imgproc.circle(image, center, (int)radius, new Scalar(255, 0, 255), 3, 8, 0);
                     System.out.println("Rot");
 
-                    double centerZ = distanceMeasure(RADIUS_OF_MARKER, FOCAL_LENGTH, radius);
+                    centerX = center.x;
+                    centerY = center.y;
+                    centerZ = distanceMeasure(RADIUS_OF_MARKER, FOCAL_LENGTH, radius);
+
+                    red.add(centerX);
+                    red.add(centerY);
+                    red.add(centerZ);
+
 
                     MatOfPoint3f objPoints = new MatOfPoint3f();
                     objPoints.push_back( new MatOfPoint3f(new Point3(center.x, center.y, centerZ)));
@@ -85,7 +117,10 @@ public class Tracking {
                     Imgproc.circle(image, center,(int) radius, new Scalar(255, 0, 255), 3, 8, 0);
                     System.out.println("Pink");
 
-                    double centerZ = distanceMeasure(RADIUS_OF_MARKER, FOCAL_LENGTH, radius);
+                    centerX = center.x;
+                    centerY = center.y;
+                    centerZ = distanceMeasure(RADIUS_OF_MARKER, FOCAL_LENGTH, radius);
+
 
                     MatOfPoint3f objPoints = new MatOfPoint3f();
                     objPoints.push_back( new MatOfPoint3f(new Point3(center.x, center.y, centerZ)));
@@ -94,7 +129,13 @@ public class Tracking {
                     Imgproc.circle(image, center, (int)radius, new Scalar(255, 0, 255), 3, 8, 0);
                     System.out.println("Schwarz");
 
-                    double centerZ = distanceMeasure(RADIUS_OF_MARKER, FOCAL_LENGTH, radius);
+
+
+                    centerX = center.x;
+                    centerY = center.y;
+                    centerZ = distanceMeasure(RADIUS_OF_MARKER, FOCAL_LENGTH, radius);
+
+
 
                     MatOfPoint3f objPoints = new MatOfPoint3f();
                     objPoints.push_back( new MatOfPoint3f(new Point3(center.x, center.y, centerZ)));

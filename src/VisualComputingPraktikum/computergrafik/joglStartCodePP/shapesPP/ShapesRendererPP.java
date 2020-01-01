@@ -29,6 +29,7 @@ package VisualComputingPraktikum.computergrafik.joglStartCodePP.shapesPP; /**
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
+import VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode.Tracking;
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.PMVMatrix;
@@ -186,8 +187,8 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
         // Initialize objects to be drawn (see respective sub-methods)
         initObject0(gl);
         initObject1(gl);
-        initObject2(gl);
-        initObject3(gl);
+        //initObject2(gl);
+        //initObject3(gl);
         // END: Preparing scene
 
         // Switch on back face culling
@@ -417,17 +418,17 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
 //        pmvMatrix.glTranslatef(1f, 0.2f, 0f);
 
         pmvMatrix.glPushMatrix();
-        pmvMatrix.glTranslatef(-1.5f, 0f, 0f);
-        displayObject0(gl);
+        pmvMatrix.glTranslatef((float)Tracking.green.get(0), (float)Tracking.green.get(1), (float)Tracking.green.get(2));
+        //displayObject0(gl);
         pmvMatrix.glPopMatrix();
 
         pmvMatrix.glPushMatrix();
-        pmvMatrix.glTranslatef(0f, 1.5f, 0f);
+        pmvMatrix.glTranslatef((float) Tracking.red.get(0), (float) Tracking.red.get(1), (float) Tracking.red.get(2));
         pmvMatrix.glRotatef(45f, 0f, 1f, 0f);
         displayObject1(gl);
         pmvMatrix.glPopMatrix();
 
-        pmvMatrix.glPushMatrix();
+        /*pmvMatrix.glPushMatrix();
         pmvMatrix.glTranslatef(0f, -1f, 0f);
         displayObject2(gl);
         pmvMatrix.glPopMatrix();
@@ -435,7 +436,7 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
         pmvMatrix.glPushMatrix();
         pmvMatrix.glTranslatef(1.5f, 0f, 0f);
         displayObject3(gl);
-        pmvMatrix.glPopMatrix();
+        pmvMatrix.glPopMatrix();*/
     }
 
     private void displayObject0(GL3 gl) {
