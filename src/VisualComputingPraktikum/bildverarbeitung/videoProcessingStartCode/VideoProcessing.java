@@ -2,9 +2,11 @@ package VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode;
 
 import VisualComputingPraktikum.bildverarbeitung.CameraCalibrator;
 import VisualComputingPraktikum.computergrafik.joglStartCodePP.shapesPP.ShapesMainWindowPP;
-import org.opencv.core.*;
+import org.opencv.core.CvException;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfInt;
+import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.utils.Converters;
 import org.opencv.videoio.VideoCapture;
 
 import javax.swing.*;
@@ -225,9 +227,11 @@ public class VideoProcessing extends JFrame {
 
 					 */
 
+					//for (int j = 0; j<objectPoints.get(0))
 
-					;
-					CameraCalibrator.pnp(Converters.vector_Mat_to_Mat(objectPoints), Converters.vector_Mat_to_Mat(imagePoints),cameraMatrix,new MatOfDouble(distCoeffs),rvecs,tvecs);
+						System.out.println(objectPoints.get(0) + "  |  " + objectPoints.get(1));
+
+					//CameraCalibrator.pnpGeneric(Converters.vector_Mat_to_Mat(objectPoints), Converters.vector_Mat_to_Mat(imagePoints),cameraMatrix,new MatOfDouble(distCoeffs),rvecs,tvecs);
 
 				}
 
@@ -287,7 +291,7 @@ public class VideoProcessing extends JFrame {
     	if(! (samplesCollected >= sampleSize)) {
     		imageList.add(frame);
 			samplesCollected++;
-    		System.out.println("Collected" + imageList.size() + "frames. " +  imageList.size() +" < " + sampleSize);
+    		System.out.println("Collected " + imageList.size() + " of "+ sampleSize +" frames. ");
     		return false;
 		} else {
     		samplesCollected = 0;

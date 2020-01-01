@@ -114,7 +114,7 @@ public class CameraCalibrator {
         System.out.println("Camera position estimated as " + tvec + " with rotation " + rotM);
     }
 
-    public static void pnp(Mat objectPoints, Mat imagePoints, Mat cameraMatrix, MatOfDouble distCoeffs, List<Mat> rvec, List<Mat> tvec) {
+    public static void pnpGeneric(Mat objectPoints, Mat imagePoints, Mat cameraMatrix, MatOfDouble distCoeffs, List<Mat> rvec, List<Mat> tvec) {
 
         Calib3d.solvePnPGeneric(objectPoints,imagePoints,cameraMatrix,distCoeffs,rvec,tvec);
         Mat rotM = Mat.zeros(3, 3, CvType.CV_64F);
