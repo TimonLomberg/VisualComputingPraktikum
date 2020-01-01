@@ -32,7 +32,7 @@ public class Shape {
         Mat img = new Mat(blurred.size(), CvType.CV_8U);
 
         Imgproc.cvtColor(image, img, Imgproc.COLOR_RGB2HSV);
-        Core.inRange(image, new Scalar(200,60,60), new Scalar(250,180,180), img);   //abends:new Scalar(250,240,120), new Scalar(255,255,190)
+        Core.inRange(image, new Scalar(245,245,245), new Scalar(255,255,255), img);   //abends:new Scalar(250,240,120), new Scalar(255,255,190)     new Scalar(200,60,60), new Scalar(250,180,180)
 
 
         Mat thresh = new Mat();
@@ -52,7 +52,7 @@ public class Shape {
 
         List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
 
-        Imgproc.findContours(thresh, contours, new Mat(), Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE);  //Imgproc.RETR_LIST / TREE , Imgproc.CHAIN_APPROX_SIMPLE);
+        Imgproc.findContours(thresh, contours, new Mat(), Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);  //Imgproc.RETR_LIST / TREE , Imgproc.CHAIN_APPROX_SIMPLE);
 
 
         for (MatOfPoint contour : contours) {
@@ -61,7 +61,7 @@ public class Shape {
             MatOfPoint2f temp = new MatOfPoint2f(contour.toArray());
             BufferedImage result = Tracking.Mat2BufferedImage(image);
 
-            Imgproc.approxPolyDP(temp, approx, Imgproc.arcLength(temp, true) * 0.02, true);
+            Imgproc.approxPolyDP(temp, approx, Imgproc.arcLength(temp, true) * 0.04, true);
             Point center = massCenterMatOfPoint2f(approx);
             int colorCount = 0;
 
