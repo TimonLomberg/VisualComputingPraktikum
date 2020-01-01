@@ -6,6 +6,7 @@ import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 enum Modes { CAPTURING, DETECTION, CALIBRATED}
@@ -87,8 +88,22 @@ public class CameraCalibrator {
 
             Calib3d.calibrateCamera(objectPoints, imagePoints, camSize, cameraMatrix, distCoeffs, rvecs, tvecs);
 
-            System.out.println("CameraMatrix is " + cameraMatrix);
-            System.out.println("DistCoeffs are " + distCoeffs);
+            System.out.print("CameraMatrix is: [");
+            for (int j=0;j<cameraMatrix.size().width;j++) {
+                for (int y=0;y<cameraMatrix.size().height;y++) {
+                    System.out.print(Arrays.toString(cameraMatrix.get(j, y)));
+                }
+            }
+            System.out.print("]");
+
+        System.out.print("DistCoeffs are: [");
+        for (int j=0;j<distCoeffs.size().width;j++) {
+            for (int y=0;y<distCoeffs.size().height;y++) {
+                System.out.print(Arrays.toString(distCoeffs.get(j, y)));
+            }
+        }
+        System.out.print("]");
+
 
 
 
