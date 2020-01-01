@@ -20,6 +20,11 @@ import java.util.List;
 
 public class Shape {
 
+    /**
+     * Searches for specific shapes
+     * @param image
+     */
+
     public static Mat shapeDetection(Mat image) {
 
         Mat blurred = image.clone();
@@ -27,10 +32,8 @@ public class Shape {
         Mat img = new Mat(blurred.size(), CvType.CV_8U);
 
         Imgproc.cvtColor(image, img, Imgproc.COLOR_RGB2HSV);
-        Core.inRange(image, new Scalar(200,60,60), new Scalar(250,180,180), img); //100,40,40), new Scalar (240,100,110)  abends:new Scalar(250,240,120), new Scalar(255,255,190)
-        //Imgproc.cvtColor(image, img, Imgproc.COLOR_RGBA2RGB );
-        //Core.inRange(image, new Scalar (100,0,0), new Scalar(250,100,250), img);
-        //sImgproc.erode(img, img, new Mat());
+        Core.inRange(image, new Scalar(200,60,60), new Scalar(250,180,180), img);   //abends:new Scalar(250,240,120), new Scalar(255,255,190)
+
 
         Mat thresh = new Mat();
 
@@ -104,9 +107,9 @@ public class Shape {
 
     private static Point massCenterMatOfPoint2f(MatOfPoint2f map) {
         final Moments moments = Imgproc.moments(map);
-        final Point centroid = new Point();
-        centroid.x = moments.get_m10() / moments.get_m00();
-        centroid.y = moments.get_m01() / moments.get_m00();
-        return centroid;
+        final Point center = new Point();
+        center.x = moments.get_m10() / moments.get_m00();
+        center.y = moments.get_m01() / moments.get_m00();
+        return center;
     }
 }

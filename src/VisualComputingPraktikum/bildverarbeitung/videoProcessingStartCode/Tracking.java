@@ -44,7 +44,13 @@ public class Tracking {
     public static ArrayList black = new ArrayList();
 
 
-
+    /**
+     *
+     * get the x,y,z value for a specific colored circle
+     *
+     * @param image
+     *
+     */
 
 
     public static Mat positionCircle (Mat image) {
@@ -65,11 +71,7 @@ public class Tracking {
 
             double[] c = circles.get(0, x);
             Point center = new Point(c[0], c[1]);
-            // circle center
-            //Imgproc.circle(image, center, 1, new Scalar(0, 100, 100), 3, 8, 0);
-            // circle outline
-            double radius = c[2]; //Math.round(c[2]);
-            //Imgproc.circle(image, center, radius, new Scalar(255, 0, 255), 3, 8, 0);
+            double radius = c[2];
             count++;
 
 
@@ -90,8 +92,8 @@ public class Tracking {
                     gr.inv();
 
                     green.add(gr.get(0,0));
-                    green.add(gr.get(1,0));
-                    green.add(gr.get(2,0));
+                    green.add(gr.get(0,1));
+                    green.add(gr.get(0,2));
 
 
                     MatOfPoint3f objPoints = new MatOfPoint3f();
@@ -105,9 +107,15 @@ public class Tracking {
                     centerY = center.y;
                     centerZ = distanceMeasure(RADIUS_OF_MARKER, FOCAL_LENGTH, radius);
 
-                    red.add(centerX);
-                    red.add(centerY);
-                    red.add(centerZ);
+                    Mat gr = new Mat();
+                    gr.put(0,0,centerX);
+                    gr.put(1,0,centerY);
+                    gr.put(2,0,centerZ);
+                    gr.inv();
+
+                    red.add(gr.get(0,0));
+                    red.add(gr.get(1,0));
+                    red.add(gr.get(2,0));
 
 
                     MatOfPoint3f objPoints = new MatOfPoint3f();
@@ -145,6 +153,16 @@ public class Tracking {
         }
         return image;
     }
+
+    /**
+     *
+     * measures the distance between the center of the circle and the camera
+     *
+     * @param RADIUS_OF_MARKER
+     * @param FOCAL_LENGTH
+     * @param radius
+     *
+     */
 
     public static double distanceMeasure (double RADIUS_OF_MARKER, double FOCAL_LENGTH, double radius){
         double centerZ = ((RADIUS_OF_MARKER *FOCAL_LENGTH) / radius) +5;
