@@ -1,23 +1,13 @@
 package VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode;
 
-import VisualComputingPraktikum.computergrafik.joglStartCodePP.shapesPP.ShapesMainWindowPP;
-import VisualComputingPraktikum.computergrafik.joglStartCodePP.shapesPP.ShapesRendererPP;
-import org.opencv.calib3d.Calib3d;
 import org.opencv.core.Point;
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
-import org.opencv.videoio.VideoCapture;
-import  org.opencv.core.CvType;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.List;
-import java.util.Vector;
-
-import static org.opencv.imgproc.Imgproc.contourArea;
 
 
 /**
