@@ -88,6 +88,21 @@ public class CameraCalibrator {
 
             Calib3d.calibrateCamera(objectPoints, imagePoints, camSize, cameraMatrix, distCoeffs, rvecs, tvecs);
 
+
+        System.out.print("ObjectPoints are: [");
+        for(Mat point : objectPoints) {
+            System.out.print("--[");
+            for (int j=0;j<point.size().width;j++) {
+                for (int y=0;y<point.size().height;y++) {
+                    System.out.print(Arrays.toString(point.get(j, y)));
+                }
+            }
+            System.out.print("]--");
+
+        }
+        System.out.print("]");
+
+
             System.out.print("CameraMatrix is: [");
             for (int j=0;j<cameraMatrix.size().width;j++) {
                 for (int y=0;y<cameraMatrix.size().height;y++) {
