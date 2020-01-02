@@ -289,13 +289,12 @@ public class VideoProcessing extends JFrame {
 			   rvecs = new Mat();
 			   tvecs = new Mat();
 
-			   CameraCalibrator.pnp(tmpObj, tmpImg, calibratorer.getIntrinsic(), new MatOfDouble(calibratorer.getDistCoeffs()), rvecs, tvecs);
+			   float[] rotation = CameraCalibrator.pnp(tmpObj, tmpImg, calibratorer.getIntrinsic(),
+					   new MatOfDouble(calibratorer.getDistCoeffs()), rvecs, tvecs);
+				alpha = rotation[0];
+				beta = rotation[1];
+				gamma = rotation[2];
 
-			   alpha = (float) Math.atan(rvecs.get(1,0)[0] / rvecs.get(0,0)[0]);
-
-			   beta = (float) Math.atan(-rvecs.get(2,0)[0] / Math.sqrt(  Math.pow(rvecs.get(2,1)[0], 2) + Math.pow(rvecs.get(2,2)[0], 2) ));
-
-			   gamma = (float) Math.atan(rvecs.get(2,1)[0] / rvecs.get(2,2)[0]);
 
 
 

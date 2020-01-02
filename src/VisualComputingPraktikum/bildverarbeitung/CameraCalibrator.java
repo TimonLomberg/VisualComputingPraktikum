@@ -17,6 +17,22 @@ enum Modes { CAPTURING, DETECTION, CALIBRATED}
  */
 public class CameraCalibrator {
 
+    public float getAlpha() {
+        return alpha;
+    }
+
+    public float getBeta() {
+        return beta;
+    }
+
+    public float getGamma() {
+        return gamma;
+    }
+
+    public float alpha;
+    public float beta;
+    public float gamma;
+
     Modes mode = Modes.CAPTURING;
 
     private static final Size boardSize = new Size(7,7);
@@ -185,18 +201,29 @@ public class CameraCalibrator {
      *
      * See cv::solvePnP for parameters
      */
-    public static void pnp(MatOfPoint3f objectPoints, MatOfPoint2f imagePoints, Mat cameraMatrix,
+    public static float[] pnp(MatOfPoint3f objectPoints, MatOfPoint2f imagePoints, Mat cameraMatrix,
                            MatOfDouble distCoeffs, Mat rvec, Mat tvec) {
         Calib3d.solvePnP(objectPoints,imagePoints,cameraMatrix,distCoeffs,rvec,tvec);
 
         Mat rotM = Mat.zeros(3, 3, CvType.CV_64F);
         Calib3d.Rodrigues(rvec, rotM);
         rotM.t();
+
       //  Core.multiply(rotM.inv(), tvec, tvec);
         Core.gemm(rotM.inv(), tvec,1 , new Mat(), 0, tvec);
 
+        float[] out = new float[3];
+
+        out[0] = (float) Math.atan(rvec.get(1,0)[0] / rvec.get(0,0)[0]);
+
+        out[1] = (float) Math.atan(-rvec.get(2,0)[0] / Math.sqrt(  Math.pow(rvec.get(2,1)[0], 2) + Math.pow(rvec.get(2,2)[0], 2) ));
+
+        out[2] = (float) Math.atan(rvec.get(2,1)[0] / rvec.get(2,2)[0]);
+
 
         System.out.println("Camera position estimated as " + tvec.dump() + " with rotation " + rotM.dump());
+
+        return out;
     }
 
 

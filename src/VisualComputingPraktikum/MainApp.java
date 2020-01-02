@@ -21,7 +21,7 @@ public class MainApp {
         videoProcessing.setMainApp(this);
 
 
-        shapesRenderer = new ShapesMainWindowPP(this);
+        shapesRenderer = new ShapesMainWindowPP();
         shapesRenderer.setMainApp(this);
     }
 
