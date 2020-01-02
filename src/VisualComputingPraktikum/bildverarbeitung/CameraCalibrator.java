@@ -11,6 +11,10 @@ import java.util.List;
 
 enum Modes { CAPTURING, DETECTION, CALIBRATED}
 
+
+/**
+ * Class for camera calibration and position estimation
+ */
 public class CameraCalibrator {
 
     Modes mode = Modes.CAPTURING;
@@ -63,8 +67,27 @@ public class CameraCalibrator {
         return out;
     }
 
-    //TODO work here
-    public static void calibrate(@NotNull Size camSize, @NotNull ArrayList<Mat> frames, int sampleSize, @NotNull Size boardSize, float squareSize, List<Mat> objectPoints, List<Mat> imagePoints, Mat cameraMatrix, Mat distCoeffs, List<Mat> rvecs, List<Mat> tvecs) {
+    /**
+     * Calibrates over the given frames of images of a chessboard and returns the Camera-Matrix,
+     * distortion-coefficients, rotation-matrix,
+     * and translation-vector
+     *
+     * @param camSize The screen size of the image in pixel
+     * @param frames The frames over which to calibrate as matrices
+     * @param sampleSize The number of samples used
+     * @param boardSize The size which indicates the number of chessboard-corners horizontally and vertically
+     * @param squareSize The size of one square of the chessboard
+     * @param objectPoints See cv::calibrateCamera documentation
+     * @param imagePoints  See cv::calibrateCamera documentation
+     * @param cameraMatrix  See cv::calibrateCamera documentation
+     * @param distCoeffs  See cv::calibrateCamera documentation
+     * @param rvecs  See cv::calibrateCamera documentation
+     * @param tvecs  See cv::calibrateCamera documentation
+     */
+    public static void calibrate(@NotNull Size camSize, @NotNull ArrayList<Mat> frames, int sampleSize,
+                                 @NotNull Size boardSize, float squareSize, List<Mat> objectPoints,
+                                 List<Mat> imagePoints, Mat cameraMatrix, Mat distCoeffs,
+                                 List<Mat> rvecs, List<Mat> tvecs) {
 
 
         MatOfPoint3f objectCorners = new MatOfPoint3f();
@@ -80,18 +103,13 @@ public class CameraCalibrator {
 
 
         if (!(imagePoints.size() == objectPoints.size())) {
-            System.err.println("imagePoints.size() and objectPoints.size() and imagePoints[i].size() must be equal to objectPoints[i].size() for each i.");
+            System.err.println("imagePoints.size() and objectPoints.size() and imagePoints[i].size() must be equal " +
+                    "to objectPoints[i].size() for each i.");
         }
 
-        ArrayList<Mat> cloneObjPoints = new ArrayList<>(objectPoints);
-        ArrayList<Mat> cloneImgPoints = new ArrayList<>(imagePoints);
+         Calib3d.calibrateCamera(objectPoints, imagePoints, camSize, cameraMatrix, distCoeffs, rvecs, tvecs);
 
-
-
-
-        Calib3d.calibrateCamera(objectPoints, imagePoints, camSize, cameraMatrix, distCoeffs, rvecs, tvecs);
-
-
+        /*
         System.out.print("ObjectPoints are: [");
         for(Mat point : objectPoints) {
             System.out.print("--[");
@@ -135,17 +153,19 @@ public class CameraCalibrator {
         }
         System.out.print("]");
 
-
+        */
 
 
     }
 
     //TODO work here
-    private static List<Mat> calcBordCornerPoints(Size boardSize, float squareSize, MatOfPoint3f corners, int sampleSize) {
+    private static List<Mat> calcBordCornerPoints(Size boardSize, float squareSize,
+                                                  MatOfPoint3f corners, int sampleSize) {
         for(int i=0; i < boardSize.height; i++) {
             for(int j=0;j < boardSize.width; j++) {
                 //corners.push_back( new MatOfPoint3f(new Point3(j*squareSize, i*squareSize, 0f)));
-                List<Mat> src = Arrays.asList(corners, new MatOfPoint3f(new Point3(j*squareSize, i*squareSize, 0f)));
+                List<Mat> src = Arrays.asList(corners, new MatOfPoint3f(new Point3(j*squareSize,
+                        i*squareSize, 0f)));
                 Core.hconcat(src, corners);
             }
         }
@@ -158,7 +178,15 @@ public class CameraCalibrator {
         return out;
     }
 
-    public static void pnp(MatOfPoint3f objectPoints, MatOfPoint2f imagePoints, Mat cameraMatrix, MatOfDouble distCoeffs, Mat rvec, Mat tvec) {
+    /**
+     * Uses cv::solvePnP to estimate rotation-matrix and translation-matrix from reference points and previously
+     * estimated camera-matrix and distortion coefficient.
+     * Also converts from computervision-coordinate-space to opengl-coordinate-space.
+     *
+     * See cv::solvePnP for parameters
+     */
+    public static void pnp(MatOfPoint3f objectPoints, MatOfPoint2f imagePoints, Mat cameraMatrix,
+                           MatOfDouble distCoeffs, Mat rvec, Mat tvec) {
         Calib3d.solvePnP(objectPoints,imagePoints,cameraMatrix,distCoeffs,rvec,tvec);
 
         Mat rotM = Mat.zeros(3, 3, CvType.CV_64F);
@@ -170,7 +198,16 @@ public class CameraCalibrator {
         System.out.println("Camera position estimated as " + tvec.dump() + " with rotation " + rotM.dump());
     }
 
-    public static void pnpGeneric(Mat objectPoints, Mat imagePoints, Mat cameraMatrix, MatOfDouble distCoeffs, List<Mat> rvec, List<Mat> tvec) {
+
+    /**
+     * Uses cv::solvePnPGeneric to estimate multiple possibilities of rotation-matrix and translation-matrix
+     * from reference points and previously estimated camera-matrix and distortion coefficient.
+     * Also converts from computervision-coordinate-space to opengl-coordinate-space.
+     *
+     * See cv::solvePnPGeneric for parameters
+     */
+    public static void pnpGeneric(Mat objectPoints, Mat imagePoints, Mat cameraMatrix, MatOfDouble distCoeffs,
+                                  List<Mat> rvec, List<Mat> tvec) {
 
         Calib3d.solvePnPGeneric(objectPoints,imagePoints,cameraMatrix,distCoeffs,rvec,tvec);
         Mat rotM = Mat.zeros(3, 3, CvType.CV_64F);
@@ -178,7 +215,7 @@ public class CameraCalibrator {
         rotM.t();
         tvec.set(0,rotM.inv().mul(tvec.get(0)));
 
-        System.out.println("Camera position estimated as " + tvec + " with rotation " + rotM);
+        //System.out.println("Camera position estimated as " + tvec + " with rotation " + rotM);
     }
 
 

@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
+/**
+ * Alternative class for camera calibration and position estimation
+ */
 public class CalibratorV2 {
 
 
@@ -51,7 +55,7 @@ public class CalibratorV2 {
 
 
     /**
-     * Init all the (global) variables needed in the controller
+     * Init all the (global) variables
      */
     public void init()
     {
@@ -69,6 +73,10 @@ public class CalibratorV2 {
         this.isCalibrated = false;
     }
 
+
+    /**
+     * Updates the board-size
+     */
     public void updateSettings()
     {
         this.boardsNumber = 10; // set for boardsNumber
@@ -80,6 +88,10 @@ public class CalibratorV2 {
 
     }
 
+    /**
+     * Finds and draws the corners of a chessboard-padded in a frame
+     * @param frame
+     */
     public void findAndDrawPoints(Mat frame)
     {
         // init
