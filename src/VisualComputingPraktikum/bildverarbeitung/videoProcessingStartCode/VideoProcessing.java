@@ -60,6 +60,7 @@ public class VideoProcessing extends JFrame {
 
 		calibratorer = new CalibratorV2();
 		calibratorer.init();
+		calibratorer.updateSettings();
 
 		new ShapesMainWindowPP();
 
@@ -241,7 +242,7 @@ public class VideoProcessing extends JFrame {
 			}*/
 
 
-		   calibratorer.updateSettings();
+
 		   calibratorer.findAndDrawPoints(frame);
 		   calibratorer.takeSnapshot();
 
