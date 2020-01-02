@@ -144,7 +144,7 @@ public class CameraCalibrator {
     private static List<Mat> calcBordCornerPoints(Size boardSize, float squareSize, MatOfPoint3f corners, int sampleSize) {
         for(int i=0; i < boardSize.height; i++) {
             for(int j=0;j < boardSize.width; j++) {
-                corners.push_back( new MatOfPoint3f(new Point3(j*squareSize, i*squareSize, 0f)));
+                //corners.push_back( new MatOfPoint3f(new Point3(j*squareSize, i*squareSize, 0f)));
                 List<Mat> src = Arrays.asList(corners, new MatOfPoint3f(new Point3(j*squareSize, i*squareSize, 0f)));
                 Core.hconcat(src, corners);
             }
