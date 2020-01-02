@@ -1,6 +1,6 @@
 package VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode;
 
-import VisualComputingPraktikum.bildverarbeitung.CameraCalibrator;
+import VisualComputingPraktikum.bildverarbeitung.CalibratorV2;
 import VisualComputingPraktikum.computergrafik.joglStartCodePP.shapesPP.ShapesMainWindowPP;
 import org.opencv.core.CvException;
 import org.opencv.core.Mat;
@@ -236,7 +236,11 @@ public class VideoProcessing extends JFrame {
 				System.out.println("" + cameraMatrix + " end matrix");
 			}*/
 
-
+		   CalibratorV2 calibratorer = new CalibratorV2();
+		   calibratorer.init();
+		   calibratorer.updateSettings();
+		   calibratorer.findAndDrawPoints(frame);
+		   calibratorer.takeSnapshot();
 
 
 

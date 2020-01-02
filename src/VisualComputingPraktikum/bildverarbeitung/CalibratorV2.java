@@ -3,26 +3,16 @@ package VisualComputingPraktikum.bildverarbeitung;
 import org.opencv.calib3d.Calib3d;
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
-import org.opencv.videoio.VideoCapture;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Timer;
 
 public class CalibratorV2 {
 
-    // a timer for acquiring the video stream
-    private Timer timer;
-    // the OpenCV object that performs the video capture
-    private VideoCapture capture;
-    // a flag to change the button behavior
-    private boolean cameraActive;
+
     // the saved chessboard image
     private Mat savedImage;
-    // the calibrated camera frame
-    private Image undistoredImage,CamStream;
     // various variables needed for the calibration
     private List<Mat> imagePoints;
     private List<Mat> objectPoints;
@@ -39,14 +29,14 @@ public class CalibratorV2 {
     /**
      * Init all the (global) variables needed in the controller
      */
-    protected void init()
+    public void init()
     {
-        this.capture = new VideoCapture();
-        this.cameraActive = false;
+
+
         this.obj = new MatOfPoint3f();
         this.imageCorners = new MatOfPoint2f();
         this.savedImage = new Mat();
-        this.undistoredImage = null;
+
         this.imagePoints = new ArrayList<>();
         this.objectPoints = new ArrayList<>();
         this.intrinsic = new Mat(3, 3, CvType.CV_32FC1);
@@ -55,7 +45,7 @@ public class CalibratorV2 {
         this.isCalibrated = false;
     }
 
-    protected void updateSettings()
+    public void updateSettings()
     {
         this.boardsNumber = 10; // set for boardsNumber
         this.numCornersHor = 7; // set for numCornersHor
@@ -66,7 +56,7 @@ public class CalibratorV2 {
 
     }
 
-    private void findAndDrawPoints(Mat frame)
+    public void findAndDrawPoints(Mat frame)
     {
         // init
         Mat grayImage = new Mat();
@@ -161,7 +151,7 @@ public class CalibratorV2 {
     /**
      * Take a snapshot to be used for the calibration process
      */
-    protected void takeSnapshot()
+    public void takeSnapshot()
     {
         if (this.successes < this.boardsNumber)
         {
