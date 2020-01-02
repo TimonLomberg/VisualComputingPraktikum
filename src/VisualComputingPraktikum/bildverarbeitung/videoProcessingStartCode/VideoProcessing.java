@@ -2,8 +2,9 @@ package VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode;
 
 import VisualComputingPraktikum.bildverarbeitung.CalibratorV2;
 import VisualComputingPraktikum.bildverarbeitung.CameraCalibrator;
-import org.opencv.core.*;
+import VisualComputingPraktikum.computergrafik.joglStartCodePP.shapesPP.ShapesMainWindowPP;
 import org.opencv.core.Point;
+import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.utils.Converters;
 import org.opencv.videoio.VideoCapture;
@@ -63,7 +64,7 @@ public class VideoProcessing extends JFrame {
 		calibratorer.init();
 		calibratorer.updateSettings();
 
-		//new ShapesMainWindowPP();
+		new ShapesMainWindowPP();
 
 		createFrame();
 		processShowVideo();

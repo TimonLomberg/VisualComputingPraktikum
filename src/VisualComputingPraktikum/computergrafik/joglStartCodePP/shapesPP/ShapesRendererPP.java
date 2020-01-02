@@ -26,13 +26,13 @@ package VisualComputingPraktikum.computergrafik.joglStartCodePP.shapesPP; /**
  * or implied, of JogAmp Community.
  */
 
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-
 import VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode.Tracking;
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.PMVMatrix;
+
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 
 /**
  * Performs the OpenGL graphics processing using the Programmable Pipeline and the
@@ -415,6 +415,8 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
         pmvMatrix.glTranslatef(interactionHandler.getxPosition(), interactionHandler.getyPosition(), 0f);
         pmvMatrix.glRotatef(interactionHandler.getAngleXaxis(), 1f, 0f, 0f);
         pmvMatrix.glRotatef(interactionHandler.getAngleYaxis(), 0f, 1f, 0f);
+
+        //pmvMatrix.glRotatef(0,0,1, );
 
         // Transform for the complete scene
 //        pmvMatrix.glTranslatef(1f, 0.2f, 0f);
