@@ -220,6 +220,10 @@ public class CameraCalibrator {
 
         out[2] = (float) Math.atan(rvec.get(2,1)[0] / rvec.get(2,2)[0]);
 
+        for (float f : out) {
+            f = f * (180.0f/3.141592653589793238463f);
+        }
+
 
         System.out.println("Camera position estimated as " + tvec.dump() + " with rotation " + rotM.dump());
 
