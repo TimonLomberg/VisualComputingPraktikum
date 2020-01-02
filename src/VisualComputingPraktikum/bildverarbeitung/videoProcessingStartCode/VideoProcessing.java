@@ -266,7 +266,7 @@ public class VideoProcessing extends JFrame {
 				rvecs = new Mat();
 			    tvecs = new Mat();
 
-			   CameraCalibrator.pnp(tmpObj, tmpImg, calibratorer.getIntrinsic(),(MatOfDouble) calibratorer.getDistCoeffs(), rvecs, tvecs);
+			   CameraCalibrator.pnp(tmpObj, tmpImg, calibratorer.getIntrinsic(),new MatOfDouble(calibratorer.getDistCoeffs()) , rvecs, tvecs);
 
 
 		   }
