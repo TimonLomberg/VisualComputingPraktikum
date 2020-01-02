@@ -166,17 +166,17 @@ public class VideoProcessing extends JFrame {
 	   int i = 1;
 	   System.out.print("Frame count: (" + i + ")"); 
 	   // loop for grabbing frames
-	   while (cap.read(frame)) { 	   
+	   while (cap.read(frame)) {
 		   i++;
-    	   if ((i % 100) == 0)
-    		   System.out.println(".(" + i + ")");
-    	   else
-    		   System.out.print("."); 
+		   if ((i % 100) == 0)
+			   System.out.println(".(" + i + ")");
+		   else
+			   System.out.print(".");
 
-    	   // display original frame from the video stream
-    	   imgPanel1.setImage(Mat2BufferedImage(frame));
-	    
-    	   // convert the frame to a grayscale image
+		   // display original frame from the video stream
+		   imgPanel1.setImage(Mat2BufferedImage(frame));
+
+		   // convert the frame to a grayscale image
 		   Mat grayImg = new Mat();
 
 		   //processedImage = Shape.shapeDetection(frame);
@@ -229,7 +229,7 @@ public class VideoProcessing extends JFrame {
 
 					 */
 
-					//for (int j = 0; j<objectPoints.get(0))
+		   //for (int j = 0; j<objectPoints.get(0))
 
 						/*System.out.println(objectPoints.toString());
 
@@ -243,11 +243,10 @@ public class VideoProcessing extends JFrame {
 			}*/
 
 
-
 		   calibratorer.findAndDrawPoints(frame);
 		   calibratorer.takeSnapshot();
 
-		   if(calibratorer.isCalibrated()) {
+		   if (calibratorer.isCalibrated()) {
 
 			   MatOfPoint3f tmpObj = new MatOfPoint3f();
 			   MatOfPoint2f tmpImg = new MatOfPoint2f();
@@ -258,7 +257,6 @@ public class VideoProcessing extends JFrame {
 			   tmpObj.fromList(tmp2);
 
 
-
 			   ArrayList<Point> tmp3 = new ArrayList<>();
 			   Converters.Mat_to_vector_Point(calibratorer.getImagePoints().get(0), tmp3);
 			   tmpImg.fromList(tmp3);
@@ -266,8 +264,8 @@ public class VideoProcessing extends JFrame {
 			   rvecs = new Mat();
 			   tvecs = new Mat();
 
-			   CameraCalibrator.pnp(tmpObj, tmpImg, calibratorer.getIntrinsic(),new MatOfDouble(calibratorer.getDistCoeffs()) , rvecs, tvecs);
-			   }
+			   CameraCalibrator.pnp(tmpObj, tmpImg, calibratorer.getIntrinsic(), new MatOfDouble(calibratorer.getDistCoeffs()), rvecs, tvecs);
+
 
 
 
