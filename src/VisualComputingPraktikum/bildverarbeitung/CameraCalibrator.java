@@ -208,6 +208,7 @@ public class CameraCalibrator {
         Mat rotM = Mat.zeros(3, 3, CvType.CV_64F);
         Calib3d.Rodrigues(rvec, rotM);
         rotM.t();
+        rvec = rotM;
 
       //  Core.multiply(rotM.inv(), tvec, tvec);
         Core.gemm(rotM.inv(), tvec,1 , new Mat(), 0, tvec);
