@@ -3,11 +3,10 @@ package VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode;
 import VisualComputingPraktikum.bildverarbeitung.CalibratorV2;
 import VisualComputingPraktikum.bildverarbeitung.CameraCalibrator;
 import VisualComputingPraktikum.computergrafik.joglStartCodePP.shapesPP.ShapesMainWindowPP;
-import org.opencv.core.CvException;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfInt;
-import org.opencv.core.Size;
+import org.opencv.core.*;
+import org.opencv.core.Point;
 import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.utils.Converters;
 import org.opencv.videoio.VideoCapture;
 
 import javax.swing.*;
@@ -42,6 +41,8 @@ public class VideoProcessing extends JFrame {
     private static final int calibSampleSize = 10;
     private static final Size boardSize = new Size(7,7);
 	private static final float squareSize = 10f;
+	Mat rvecs;
+	Mat tvecs;
 
 	CalibratorV2 calibratorer;
 
@@ -248,7 +249,25 @@ public class VideoProcessing extends JFrame {
 		   calibratorer.takeSnapshot();
 
 		   if(calibratorer.isCalibrated()) {
-			   CameraCalibrator.pnp(calibratorer.getObjectPoints());
+
+			   MatOfPoint3f tmpObj = new MatOfPoint3f();
+			   for (Mat object : calibratorer.getObjectPoints()) {
+			   		ArrayList<Point3> tmp2 = new ArrayList<>();
+				   Converters.Mat_to_vector_Point3f(object, tmp2);
+				   tmpObj.push_back(Converters.vector_Point3f_to_Mat(tmp2));
+			   }
+			   MatOfPoint2f tmpImg = new MatOfPoint2f();
+			   for (Mat object : calibratorer.getImagePoints()) {
+				   ArrayList<Point> tmp2 = new ArrayList<>();
+				   Converters.Mat_to_vector_Point2f(object, tmp2);
+				   tmpObj.push_back(Converters.vector_Point2f_to_Mat(tmp2));
+			   }
+
+
+				rvecs = new Mat();
+			    tvecs = new Mat();
+
+			   CameraCalibrator.pnp(tmpObj, tmpImg, calibratorer.getIntrinsic(),(MatOfDouble) calibratorer.getDistCoeffs(), rvecs, tvecs);
 		   }
 
 
@@ -309,4 +328,6 @@ public class VideoProcessing extends JFrame {
     		return true;
 		}
 	}
+
+
 }

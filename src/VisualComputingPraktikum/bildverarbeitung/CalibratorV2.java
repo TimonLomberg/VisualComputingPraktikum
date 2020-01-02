@@ -39,6 +39,11 @@ public class CalibratorV2 {
     private int numCornersHor;
     private int numCornersVer;
     private int successes;
+
+    public Mat getIntrinsic() {
+        return intrinsic;
+    }
+
     private Mat intrinsic;
     private Mat distCoeffs;
     private boolean isCalibrated;
