@@ -42,6 +42,8 @@ public class VideoProcessing extends JFrame {
     private static final Size boardSize = new Size(7,7);
 	private static final float squareSize = 10f;
 
+	CalibratorV2 calibratorer;
+
 
     int samplesCollected;
     ArrayList<Mat> collectedFrames;
@@ -56,6 +58,8 @@ public class VideoProcessing extends JFrame {
 		samplesCollected = 0;
 		collectedFrames = new ArrayList<Mat>(calibSampleSize);
 
+		calibratorer = new CalibratorV2();
+		calibratorer.init();
 
 		new ShapesMainWindowPP();
 
@@ -236,31 +240,10 @@ public class VideoProcessing extends JFrame {
 				System.out.println("" + cameraMatrix + " end matrix");
 			}*/
 
-		   CalibratorV2 calibratorer = new CalibratorV2();
-		   calibratorer.init();
+
 		   calibratorer.updateSettings();
 		   calibratorer.findAndDrawPoints(frame);
 		   calibratorer.takeSnapshot();
-		   calibratorer.findAndDrawPoints(frame);
-           calibratorer.takeSnapshot();
-		   calibratorer.findAndDrawPoints(frame);
-           calibratorer.takeSnapshot();
-		   calibratorer.findAndDrawPoints(frame);
-           calibratorer.takeSnapshot();
-		   calibratorer.findAndDrawPoints(frame);
-           calibratorer.takeSnapshot();
-		   calibratorer.findAndDrawPoints(frame);
-           calibratorer.takeSnapshot();
-		   calibratorer.findAndDrawPoints(frame);
-           calibratorer.takeSnapshot();
-		   calibratorer.findAndDrawPoints(frame);
-           calibratorer.takeSnapshot();
-		   calibratorer.findAndDrawPoints(frame);
-           calibratorer.takeSnapshot();
-		   calibratorer.findAndDrawPoints(frame);
-           calibratorer.takeSnapshot();
-		   calibratorer.findAndDrawPoints(frame);
-           calibratorer.takeSnapshot();
 
 
 
