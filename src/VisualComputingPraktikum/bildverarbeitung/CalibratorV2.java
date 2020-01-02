@@ -149,7 +149,7 @@ public class CalibratorV2 {
             System.out.print("--[");
             for (int j=0;j<point.size().width;j++) {
                 for (int y=0;y<point.size().height;y++) {
-                    System.out.print(point.get(j, y).toString());
+                    System.out.print(Arrays.toString(point.get(j, y)));
                 }
             }
             System.out.print("]--");
