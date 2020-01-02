@@ -153,20 +153,23 @@ public class CalibratorV2 {
      */
     public void takeSnapshot()
     {
-        if (this.successes < this.boardsNumber)
-        {
-            // save all the needed values
-            this.imagePoints.add(imageCorners);
-            imageCorners = new MatOfPoint2f();
-            this.objectPoints.add(obj);
-            this.successes++;
+        if (!imageCorners.empty()) {
+            if (this.successes < this.boardsNumber)
+            {
+                // save all the needed values
+                this.imagePoints.add(imageCorners);
+                imageCorners = new MatOfPoint2f();
+                this.objectPoints.add(obj);
+                this.successes++;
+            }
+
+            // reach the correct number of images needed for the calibration
+            if (this.successes == this.boardsNumber)
+            {
+                this.calibrateCamera();
+            }
         }
 
-        // reach the correct number of images needed for the calibration
-        if (this.successes == this.boardsNumber)
-        {
-            this.calibrateCamera();
-        }
     }
 
 
