@@ -13,6 +13,23 @@ public class CalibratorV2 {
 
     // the saved chessboard image
     private Mat savedImage;
+
+    public List<Mat> getImagePoints() {
+        return imagePoints;
+    }
+
+    public List<Mat> getObjectPoints() {
+        return objectPoints;
+    }
+
+    public Mat getDistCoeffs() {
+        return distCoeffs;
+    }
+
+    public boolean isCalibrated() {
+        return isCalibrated;
+    }
+
     // various variables needed for the calibration
     private List<Mat> imagePoints;
     private List<Mat> objectPoints;
@@ -25,6 +42,8 @@ public class CalibratorV2 {
     private Mat intrinsic;
     private Mat distCoeffs;
     private boolean isCalibrated;
+
+
 
     /**
      * Init all the (global) variables needed in the controller
@@ -125,7 +144,7 @@ public class CalibratorV2 {
             System.out.print("--[");
             for (int j=0;j<point.size().width;j++) {
                 for (int y=0;y<point.size().height;y++) {
-                    System.out.print(Arrays.toString(point.get(j, y)));
+                    System.out.print(point.get(j, y).toString());
                 }
             }
             System.out.print("]--");
@@ -167,7 +186,9 @@ public class CalibratorV2 {
             if (this.successes == this.boardsNumber)
             {
                 this.calibrateCamera();
+                this.isCalibrated = true;
             }
+            else this.isCalibrated = false;
         }
 
     }
