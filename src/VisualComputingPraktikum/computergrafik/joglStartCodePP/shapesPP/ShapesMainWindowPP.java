@@ -89,6 +89,7 @@ public class ShapesMainWindowPP extends JFrame {
         canvasSH = new ShapesRendererPP(capabilities);
         canvas = canvasSH;
 
+
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
 
         // Create an animator that drives the canvas display() at the specified

@@ -44,9 +44,12 @@ public class MainApp {
 
     }
 
+
+
+
     public void init( ) {
         shapesRenderer.setMainApp(this);
-        shapesRenderer.canvasSH.setMainApp(this);
+        shapesRenderer.canvasSH.setVideoProcessing(videoProcessing);
         videoProcessing.setMainApp(this);
     }
 
