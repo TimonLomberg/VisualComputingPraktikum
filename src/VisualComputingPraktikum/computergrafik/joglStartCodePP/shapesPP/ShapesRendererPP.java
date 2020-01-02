@@ -423,23 +423,35 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
         pmvMatrix.glRotatef(interactionHandler.getAngleXaxis(), 1f, 0f, 0f);
         pmvMatrix.glRotatef(interactionHandler.getAngleYaxis(), 0f, 1f, 0f);
 
-        if (mainApp.videoProcessing.getAlpha() != 0)
-            pmvMatrix.glRotatef(1,0,0, mainApp.videoProcessing.getAlpha() * (180.0f/3.141592653589793238463f));
-        if (mainApp.videoProcessing.getBeta() != 0)
-            pmvMatrix.glRotatef(0,1,0, mainApp.videoProcessing.getBeta() * (180.0f/3.141592653589793238463f));
-        if (mainApp.videoProcessing.getGamma() != 0)
-            pmvMatrix.glRotatef(0,0,1, mainApp.videoProcessing.getGamma() * (180.0f/3.141592653589793238463f));
+        if (mainApp.videoProcessing.getAlpha() != 0){
+            pmvMatrix.glRotatef(mainApp.videoProcessing.getAlpha(),1,0,0);
+            System.err.println("alpha rotiert");
+        }
+        if (mainApp.videoProcessing.getBeta() != 0){
+            pmvMatrix.glRotatef(0,1,0, mainApp.videoProcessing.getBeta());
+
+            System.err.println("beta rotiert");}
+        if (mainApp.videoProcessing.getGamma() != 0){
+            pmvMatrix.glRotatef(0,0,1, mainApp.videoProcessing.getGamma());
+            System.err.println("gamma rotiert");}
+
+
 
         // Transform for the complete scene
 //        pmvMatrix.glTranslatef(1f, 0.2f, 0f);
 
         //creates Objects depending on Tracker/Circles
-        if(Tracking.greenCenterX != 0) {
+        /*if(Tracking.greenCenterX != 0) {
             pmvMatrix.glPushMatrix();
             pmvMatrix.glTranslatef((float) Tracking.greenCenterX/10, -(float) Tracking.greenCenterY/10, -(float) Tracking.greenCenterZ/10);
             displayObject0(gl);
             pmvMatrix.glPopMatrix();
-        }
+        }*/
+
+        pmvMatrix.glPushMatrix();
+        pmvMatrix.glTranslatef(0f, 1f, 0f);
+        displayObject0(gl);
+        pmvMatrix.glPopMatrix();
 
         if(Tracking.redCenterX != 0) {
             pmvMatrix.glPushMatrix();
