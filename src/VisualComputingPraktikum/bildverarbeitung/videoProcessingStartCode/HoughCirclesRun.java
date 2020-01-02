@@ -49,7 +49,7 @@ public class HoughCirclesRun {
             for (int i = 0; i <= count; i++) {
                 Color colorCircle = new Color(result.getRGB((int) center.x, (int) center.y));
 
-                if (colorCircle.getGreen() >= 110 && colorCircle.getRed() >= 50 && colorCircle.getBlue() == 255) { //abends: if (colorCircle.getGreen() >= 240 && colorCircle.getRed() >= 80 && colorCircle.getRed() <= 110 && colorCircle.getBlue() == 255) {
+                if (colorCircle.getGreen() >= 250 && colorCircle.getRed() >= 250 && colorCircle.getBlue() >=255) { //abends: if (colorCircle.getGreen() >= 240 && colorCircle.getRed() >= 80 && colorCircle.getRed() <= 110 && colorCircle.getBlue() == 255) {
 
                     Imgproc.circle(image, center, radius, new Scalar(255, 0, 255), 3, 8, 0);
                     System.out.println("Kreis");

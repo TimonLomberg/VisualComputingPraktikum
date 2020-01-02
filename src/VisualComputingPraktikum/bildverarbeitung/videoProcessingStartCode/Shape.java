@@ -70,11 +70,11 @@ public class Shape {
             if (count == 4) {
                 //System.out.println(count);
                 //System.out.println("Viereck");
-                Imgproc.drawContours(image, contours, -1, new Scalar(255, 0, 0), 8);
+                //Imgproc.drawContours(image, contours, -1, new Scalar(255, 0, 0), 8);
 
                 for (int i = 0; i <= colorCount; i++) {
                     Color color = new Color(result.getRGB((int) center.x, (int) center.y));
-                    if (color.getGreen() >= 110 && color.getRed() >= 50 && color.getBlue() == 255) {
+                    if (color.getGreen() >= 250 && color.getRed() >= 250 && color.getBlue() >=255) {  //color.getGreen() >= 110 && color.getRed() >= 50 && color.getBlue() == 255
                         System.out.println("Viereck");
                         ImageProcessing.haupt("resources/images/wallOfThorns.jpg");
                     }
@@ -83,11 +83,11 @@ public class Shape {
 
             } else if (count == 3) {
                 System.out.println(count);
-                Imgproc.drawContours(image, contours, -1, new Scalar(255, 0, 0), 8);
+                //Imgproc.drawContours(image, contours, -1, new Scalar(255, 0, 0), 8);
 
                 for (int i = 0; i <= colorCount; i++) {
                     Color color = new Color(result.getRGB((int) center.x, (int) center.y));
-                    if (color.getGreen() >= 110 && color.getRed() >= 50 && color.getBlue() == 255) {
+                    if (color.getGreen() >= 250 && color.getRed() >= 250 && color.getBlue() >=255) {
                         System.out.println("Dreieck");
                         ImageProcessing.haupt("resources/images/raiseDead.jpg");
                     }
