@@ -192,7 +192,8 @@ public class CameraCalibrator {
         Mat rotM = Mat.zeros(3, 3, CvType.CV_64F);
         Calib3d.Rodrigues(rvec, rotM);
         rotM.t();
-        Core.multiply(rotM.inv(), tvec, tvec);
+      //  Core.multiply(rotM.inv(), tvec, tvec);
+        Core.gemm(rotM.inv(), tvec,1 , null, 0, tvec);
 
 
         System.out.println("Camera position estimated as " + tvec.dump() + " with rotation " + rotM.dump());

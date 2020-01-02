@@ -5,7 +5,6 @@ import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -143,6 +142,7 @@ public class CalibratorV2 {
 
 
         //DEBUGGING
+        /*
         System.out.print("ObjectPoints are: [");
         for(Mat point : objectPoints) {
             System.out.print("--[");
@@ -182,6 +182,8 @@ public class CalibratorV2 {
 
         System.out.print("]");
 
+
+         */
     }
 
     /**

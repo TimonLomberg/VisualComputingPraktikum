@@ -242,6 +242,8 @@ public class VideoProcessing extends JFrame {
 				System.out.println("" + cameraMatrix + " end matrix");
 			}*/
 
+		   //	This uses the calibration methods
+
 
 		   calibratorer.findAndDrawPoints(frame);
 		   calibratorer.takeSnapshot();
