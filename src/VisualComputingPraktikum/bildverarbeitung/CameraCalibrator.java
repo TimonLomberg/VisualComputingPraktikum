@@ -77,16 +77,19 @@ public class CameraCalibrator {
         }
         cameraMatrix = Mat.eye(3,3, CvType.CV_64F);
         distCoeffs = Mat.zeros(8,1, CvType.CV_64F);
-        MatOfPoint3f pointMat = new MatOfPoint3f();
 
-        objectPoints = calcBordCornerPoints(new Size(7,7),40f, pointMat, sampleSize);
 
         if (!(imagePoints.size() == objectPoints.size())) {
             System.err.println("imagePoints.size() and objectPoints.size() and imagePoints[i].size() must be equal to objectPoints[i].size() for each i.");
         }
 
+        ArrayList<Mat> cloneObjPoints = new ArrayList<>(objectPoints);
+        ArrayList<Mat> cloneImgPoints = new ArrayList<>(imagePoints);
 
-            Calib3d.calibrateCamera(objectPoints, imagePoints, camSize, cameraMatrix, distCoeffs, rvecs, tvecs);
+
+
+
+        Calib3d.calibrateCamera(objectPoints, imagePoints, camSize, cameraMatrix, distCoeffs, rvecs, tvecs);
 
 
         System.out.print("ObjectPoints are: [");
@@ -142,6 +145,8 @@ public class CameraCalibrator {
         for(int i=0; i < boardSize.height; i++) {
             for(int j=0;j < boardSize.width; j++) {
                 corners.push_back( new MatOfPoint3f(new Point3(j*squareSize, i*squareSize, 0f)));
+                List<Mat> src = Arrays.asList(corners, new MatOfPoint3f(new Point3(j*squareSize, i*squareSize, 0f)));
+                Core.hconcat(src, corners);
             }
         }
         ArrayList<Mat> out = new ArrayList<Mat>(sampleSize);
