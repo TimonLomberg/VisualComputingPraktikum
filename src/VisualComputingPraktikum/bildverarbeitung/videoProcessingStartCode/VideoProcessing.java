@@ -267,7 +267,7 @@ public class VideoProcessing extends JFrame {
 			   for(Point point : tmp3) {
 				   ArrayList<Point> a = new ArrayList<>();
 				   a.add(point);
-				   tmpObj.push_back(Converters.vector_Point_to_Mat(a));
+				   tmpImg.push_back(Converters.vector_Point_to_Mat(a));
 			   }
 
 
