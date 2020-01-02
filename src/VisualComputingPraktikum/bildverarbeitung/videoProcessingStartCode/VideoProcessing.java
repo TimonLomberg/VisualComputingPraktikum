@@ -2,8 +2,8 @@ package VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode;
 
 import VisualComputingPraktikum.bildverarbeitung.CalibratorV2;
 import VisualComputingPraktikum.bildverarbeitung.CameraCalibrator;
-import org.opencv.core.Point;
 import org.opencv.core.*;
+import org.opencv.core.Point;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.utils.Converters;
 import org.opencv.videoio.VideoCapture;
@@ -250,16 +250,24 @@ public class VideoProcessing extends JFrame {
 		   if(calibratorer.isCalibrated()) {
 
 			   MatOfPoint3f tmpObj = new MatOfPoint3f();
-			   for (Mat object : calibratorer.getObjectPoints()) {
-			   		ArrayList<Point3> tmp2 = new ArrayList<>();
-				   Converters.Mat_to_vector_Point3f(object, tmp2);
-				   tmpObj.push_back(Converters.vector_Point3f_to_Mat(tmp2));
+
+
+			   ArrayList<Point3> tmp2 = new ArrayList<>();
+			   Converters.Mat_to_vector_Point3f(calibratorer.getObjectPoints().get(0), tmp2);
+			   for(Point3 point : tmp2) {
+				   ArrayList<Point3> a = new ArrayList<>();
+				   a.add(point);
+				   tmpObj.push_back(Converters.vector_Point3f_to_Mat(a));
 			   }
+
+
 			   MatOfPoint2f tmpImg = new MatOfPoint2f();
-			   for (Mat object : calibratorer.getImagePoints()) {
-				   ArrayList<Point> tmp2 = new ArrayList<>();
-				   Converters.Mat_to_vector_Point(object, tmp2);
-				   tmpImg.push_back(Converters.vector_Point_to_Mat(tmp2));
+			   ArrayList<Point> tmp3 = new ArrayList<>();
+			   Converters.Mat_to_vector_Point(calibratorer.getImagePoints().get(0), tmp3);
+			   for(Point point : tmp3) {
+				   ArrayList<Point> a = new ArrayList<>();
+				   a.add(point);
+				   tmpObj.push_back(Converters.vector_Point_to_Mat(a));
 			   }
 
 
