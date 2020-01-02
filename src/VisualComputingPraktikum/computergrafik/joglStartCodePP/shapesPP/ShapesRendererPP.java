@@ -430,14 +430,14 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
         pmvMatrix.glRotatef(interactionHandler.getAngleXaxis(), 1f, 0f, 0f);
         pmvMatrix.glRotatef(interactionHandler.getAngleYaxis(), 0f, 1f, 0f);
 
-        if (mainApp.getVideoProcessing().getAlpha() != 0) {
+        if (videoProcessing.getAlpha() != 0) {
             pmvMatrix.glRotatef(1,0,0, videoProcessing.getAlpha());
             System.err.println("Rotated X!");
         }
 
-        if (mainApp.getVideoProcessing().getBeta() != 0)
+        if (videoProcessing.getBeta() != 0)
             pmvMatrix.glRotatef(0,1,0, videoProcessing.getBeta());
-        if (mainApp.getVideoProcessing().getGamma() != 0)
+        if (videoProcessing.getGamma() != 0)
             pmvMatrix.glRotatef(0,0,1, videoProcessing.getGamma());
 
         // Transform for the complete scene
