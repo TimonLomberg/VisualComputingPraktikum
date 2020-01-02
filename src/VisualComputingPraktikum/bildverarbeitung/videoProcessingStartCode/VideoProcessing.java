@@ -259,7 +259,7 @@ public class VideoProcessing extends JFrame {
 			   for (Mat object : calibratorer.getImagePoints()) {
 				   ArrayList<Point> tmp2 = new ArrayList<>();
 				   Converters.Mat_to_vector_Point(object, tmp2);
-				   tmpObj.push_back(Converters.vector_Point_to_Mat(tmp2));
+				   tmpImg.push_back(Converters.vector_Point_to_Mat(tmp2));
 			   }
 
 
