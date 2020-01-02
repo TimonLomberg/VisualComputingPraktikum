@@ -8,6 +8,22 @@ import org.opencv.core.Core;
 
 public class MainApp {
 
+    public VideoProcessing getVideoProcessing() {
+        return videoProcessing;
+    }
+
+    public void setVideoProcessing(VideoProcessing videoProcessing) {
+        this.videoProcessing = videoProcessing;
+    }
+
+    public ShapesMainWindowPP getShapesRenderer() {
+        return shapesRenderer;
+    }
+
+    public void setShapesRenderer(ShapesMainWindowPP shapesRenderer) {
+        this.shapesRenderer = shapesRenderer;
+    }
+
     public VideoProcessing videoProcessing;
     public ShapesMainWindowPP shapesRenderer;
 
@@ -20,7 +36,7 @@ public class MainApp {
 
         shapesRenderer = new ShapesMainWindowPP();
         shapesRenderer.setMainApp(this);
-        shapesRenderer.setVideoProcessing(videoProcessing);
+        //shapesRenderer.setVideoProcessing(videoProcessing);
         videoProcessing = new VideoProcessing();
         videoProcessing.setMainApp(this);
 
@@ -28,7 +44,7 @@ public class MainApp {
 
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
 
         new MainApp();

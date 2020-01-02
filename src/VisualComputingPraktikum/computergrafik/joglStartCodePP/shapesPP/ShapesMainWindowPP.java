@@ -58,11 +58,7 @@ import java.awt.event.WindowEvent;
  */
 public class ShapesMainWindowPP extends JFrame {
 
-    public void setVideoProcessing(VideoProcessing videoProcessing) {
-        this.videoProcessing = videoProcessing;
-    }
 
-    public VideoProcessing videoProcessing;
 
 
 

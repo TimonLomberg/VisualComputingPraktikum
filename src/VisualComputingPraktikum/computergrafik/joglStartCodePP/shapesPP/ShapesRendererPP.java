@@ -28,6 +28,7 @@ package VisualComputingPraktikum.computergrafik.joglStartCodePP.shapesPP; /**
 
 import VisualComputingPraktikum.MainApp;
 import VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode.Tracking;
+import VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode.VideoProcessing;
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.PMVMatrix;
@@ -65,6 +66,12 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
+    public void setVideoProcessing(VideoProcessing videoProcessing) {
+        this.videoProcessing = videoProcessing;
+    }
+
+    public VideoProcessing videoProcessing;
+
 
     public MainApp mainApp;
 
@@ -423,12 +430,12 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
         pmvMatrix.glRotatef(interactionHandler.getAngleXaxis(), 1f, 0f, 0f);
         pmvMatrix.glRotatef(interactionHandler.getAngleYaxis(), 0f, 1f, 0f);
 
-        if (mainApp.videoProcessing.getAlpha() != 0)
-            pmvMatrix.glRotatef(1,0,0, mainApp.videoProcessing.getAlpha());
-        if (mainApp.videoProcessing.getBeta() != 0)
-            pmvMatrix.glRotatef(0,1,0, mainApp.videoProcessing.getBeta());
-        if (mainApp.videoProcessing.getGamma() != 0)
-            pmvMatrix.glRotatef(0,0,1, mainApp.videoProcessing.getGamma());
+        if (mainApp.getVideoProcessing().getAlpha() != 0)
+            pmvMatrix.glRotatef(1,0,0, mainApp.getVideoProcessing().getAlpha());
+        if (mainApp.getVideoProcessing().getBeta() != 0)
+            pmvMatrix.glRotatef(0,1,0, mainApp.getVideoProcessing().getBeta());
+        if (mainApp.getVideoProcessing().getGamma() != 0)
+            pmvMatrix.glRotatef(0,0,1, mainApp.getVideoProcessing().getGamma());
 
         // Transform for the complete scene
 //        pmvMatrix.glTranslatef(1f, 0.2f, 0f);
