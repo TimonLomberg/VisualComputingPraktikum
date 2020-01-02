@@ -241,15 +241,25 @@ public class VideoProcessing extends JFrame {
 		   calibratorer.updateSettings();
 		   calibratorer.findAndDrawPoints(frame);
 		   calibratorer.takeSnapshot();
+		   calibratorer.findAndDrawPoints(frame);
            calibratorer.takeSnapshot();
+		   calibratorer.findAndDrawPoints(frame);
            calibratorer.takeSnapshot();
+		   calibratorer.findAndDrawPoints(frame);
            calibratorer.takeSnapshot();
+		   calibratorer.findAndDrawPoints(frame);
            calibratorer.takeSnapshot();
+		   calibratorer.findAndDrawPoints(frame);
            calibratorer.takeSnapshot();
+		   calibratorer.findAndDrawPoints(frame);
            calibratorer.takeSnapshot();
+		   calibratorer.findAndDrawPoints(frame);
            calibratorer.takeSnapshot();
+		   calibratorer.findAndDrawPoints(frame);
            calibratorer.takeSnapshot();
+		   calibratorer.findAndDrawPoints(frame);
            calibratorer.takeSnapshot();
+		   calibratorer.findAndDrawPoints(frame);
            calibratorer.takeSnapshot();
 
 
