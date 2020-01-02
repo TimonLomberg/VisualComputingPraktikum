@@ -72,6 +72,11 @@ public class CalibratorV2 {
         this.isCalibrated = false;
     }
 
+    public void reset() {
+        this.successes = 0;
+        this.isCalibrated = false;
+    }
+
 
     /**
      * Updates the board-size

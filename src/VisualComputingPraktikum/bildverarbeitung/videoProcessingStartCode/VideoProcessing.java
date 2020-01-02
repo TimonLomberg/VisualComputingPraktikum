@@ -296,7 +296,7 @@ public class VideoProcessing extends JFrame {
 				gamma = rotation[2];
 
 
-				calibratorer.init();
+				calibratorer.reset();
 
 
 
