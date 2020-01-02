@@ -16,7 +16,7 @@ public class CameraCalibrator {
     Modes mode = Modes.CAPTURING;
 
     private static final Size boardSize = new Size(7,7);
-    private static final float squareSize = 30f;
+    private static final float squareSize = 100f;
     /*
     static int[] testInt = {0};
     public static void main(String[] args) {    }
@@ -164,7 +164,8 @@ public class CameraCalibrator {
         Mat rotM = Mat.zeros(3, 3, CvType.CV_64F);
         Calib3d.Rodrigues(rvec, rotM);
         rotM.t();
-        tvec = rotM.inv();//.mul(tvec);
+        Core.multiply(rotM.inv(), tvec, tvec);
+
 
         System.out.println("Camera position estimated as " + tvec.dump() + " with rotation " + rotM.dump());
     }
