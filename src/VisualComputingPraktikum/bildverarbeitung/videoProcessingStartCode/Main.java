@@ -1,6 +1,5 @@
 package VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode;
 
-import VisualComputingPraktikum.computergrafik.joglStartCodePP.shapesPP.ShapesMainWindowPP;
 import org.opencv.core.Core;
 
 /**
@@ -19,7 +18,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		// Load OpenCV libraries and start program
-	    System.loadLibrary( Core.NATIVE_LIBRARY_NAME );
+		System.loadLibrary( Core.NATIVE_LIBRARY_NAME );
 		new VideoProcessing();
 	}
 

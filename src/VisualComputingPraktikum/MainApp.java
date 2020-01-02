@@ -2,19 +2,32 @@ package VisualComputingPraktikum;
 
 // Test
 
+import VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode.VideoProcessing;
 import VisualComputingPraktikum.computergrafik.joglStartCodePP.shapesPP.ShapesMainWindowPP;
+import org.opencv.core.Core;
 
 public class MainApp {
 
-    VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode.Main videoProcessing;
-    ShapesMainWindowPP shapesRenderer;
+    public VideoProcessing videoProcessing;
+    public ShapesMainWindowPP shapesRenderer;
+
+
 
     public MainApp () {
-        videoProcessing = new VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode.Main();
-        shapesRenderer = new ShapesMainWindowPP();
+
+        // Load OpenCV libraries and start program
+        System.loadLibrary( Core.NATIVE_LIBRARY_NAME );
+        videoProcessing = new VideoProcessing();
+        videoProcessing.setMainApp(this);
+
+
+        shapesRenderer = new ShapesMainWindowPP(this);
+        shapesRenderer.setMainApp(this);
     }
 
     public static void main(String args[]) {
+
+
         new MainApp();
     }
 }

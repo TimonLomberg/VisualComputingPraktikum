@@ -27,16 +27,16 @@ package VisualComputingPraktikum.computergrafik.joglStartCodePP.shapesPP; /**
  */
 
 
-import java.awt.Dimension;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import javax.swing.JFrame;
-
+import VisualComputingPraktikum.MainApp;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * Top-level class of the application displaying the OpenGL component.
@@ -56,6 +56,12 @@ import com.jogamp.opengl.util.FPSAnimator;
  *
  */
 public class ShapesMainWindowPP extends JFrame {
+
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
+    }
+
+    public MainApp mainApp;
 
     private static final long serialVersionUID = 1L;
     // Define constants for the top-level container

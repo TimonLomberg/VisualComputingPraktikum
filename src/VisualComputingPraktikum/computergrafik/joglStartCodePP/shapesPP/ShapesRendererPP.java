@@ -26,6 +26,7 @@ package VisualComputingPraktikum.computergrafik.joglStartCodePP.shapesPP; /**
  * or implied, of JogAmp Community.
  */
 
+import VisualComputingPraktikum.MainApp;
 import VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode.Tracking;
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLCanvas;
@@ -60,6 +61,12 @@ import java.nio.IntBuffer;
  *
  */
 public class ShapesRendererPP extends GLCanvas implements GLEventListener {
+
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
+    }
+
+    public MainApp mainApp;
 
     private static final long serialVersionUID = 1L;
 
@@ -416,7 +423,12 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
         pmvMatrix.glRotatef(interactionHandler.getAngleXaxis(), 1f, 0f, 0f);
         pmvMatrix.glRotatef(interactionHandler.getAngleYaxis(), 0f, 1f, 0f);
 
-        //pmvMatrix.glRotatef(0,0,1, );
+        if (mainApp.videoProcessing.getAlpha() != 0)
+            pmvMatrix.glRotatef(1,0,0, mainApp.videoProcessing.getAlpha() * (180.0f/3.141592653589793238463f));
+        if (mainApp.videoProcessing.getBeta() != 0)
+            pmvMatrix.glRotatef(0,1,0, mainApp.videoProcessing.getBeta() * (180.0f/3.141592653589793238463f));
+        if (mainApp.videoProcessing.getGamma() != 0)
+            pmvMatrix.glRotatef(0,0,1, mainApp.videoProcessing.getGamma() * (180.0f/3.141592653589793238463f));
 
         // Transform for the complete scene
 //        pmvMatrix.glTranslatef(1f, 0.2f, 0f);

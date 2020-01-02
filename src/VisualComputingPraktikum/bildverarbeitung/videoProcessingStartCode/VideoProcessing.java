@@ -1,8 +1,8 @@
 package VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode;
 
+import VisualComputingPraktikum.MainApp;
 import VisualComputingPraktikum.bildverarbeitung.CalibratorV2;
 import VisualComputingPraktikum.bildverarbeitung.CameraCalibrator;
-import VisualComputingPraktikum.computergrafik.joglStartCodePP.shapesPP.ShapesMainWindowPP;
 import org.opencv.core.Point;
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
@@ -41,10 +41,32 @@ public class VideoProcessing extends JFrame {
     private static final int calibSampleSize = 10;
     private static final Size boardSize = new Size(7,7);
 	private static final float squareSize = 10f;
-	Mat rvecs;
-	Mat tvecs;
+	public Mat rvecs;
+	public Mat tvecs;
+
+	public float getAlpha() {
+		return alpha;
+	}
+
+	public float getBeta() {
+		return beta;
+	}
+
+	public float getGamma() {
+		return gamma;
+	}
+
+	public float alpha;
+	public float beta;
+	public float gamma;
 
 	CalibratorV2 calibratorer;
+
+	public void setMainApp(MainApp mainApp) {
+		this.mainApp = mainApp;
+	}
+
+	public MainApp mainApp;
 
 
     int samplesCollected;
@@ -64,7 +86,7 @@ public class VideoProcessing extends JFrame {
 		calibratorer.init();
 		calibratorer.updateSettings();
 
-		new ShapesMainWindowPP();
+		//new ShapesMainWindowPP();
 
 		createFrame();
 		processShowVideo();
@@ -269,11 +291,11 @@ public class VideoProcessing extends JFrame {
 
 			   CameraCalibrator.pnp(tmpObj, tmpImg, calibratorer.getIntrinsic(), new MatOfDouble(calibratorer.getDistCoeffs()), rvecs, tvecs);
 
-				float alpha = (float) Math.atan(rvecs.get(1,0)[0] / rvecs.get(0,0)[0]);
+			   alpha = (float) Math.atan(rvecs.get(1,0)[0] / rvecs.get(0,0)[0]);
 
-				float beta = (float) Math.atan(-rvecs.get(2,0)[0] / Math.sqrt(  Math.pow(rvecs.get(2,1)[0], 2) + Math.pow(rvecs.get(2,2)[0], 2) ));
+			   beta = (float) Math.atan(-rvecs.get(2,0)[0] / Math.sqrt(  Math.pow(rvecs.get(2,1)[0], 2) + Math.pow(rvecs.get(2,2)[0], 2) ));
 
-				float gamma = (float) Math.atan(rvecs.get(2,1)[0] / rvecs.get(2,2)[0]);
+			   gamma = (float) Math.atan(rvecs.get(2,1)[0] / rvecs.get(2,2)[0]);
 
 
 
