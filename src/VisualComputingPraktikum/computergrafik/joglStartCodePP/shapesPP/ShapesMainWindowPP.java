@@ -59,17 +59,17 @@ public class ShapesMainWindowPP extends JFrame {
 
 
 
+    public MainApp mainApp;
 
+    public ShapesRendererPP canvasSH;
+    GLCanvas canvas;
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
         canvasSH.setMainApp(this.mainApp);
     }
 
-    public MainApp mainApp;
 
-    ShapesRendererPP canvasSH;
-    GLCanvas canvas;
 
     private static final long serialVersionUID = 1L;
     // Define constants for the top-level container
