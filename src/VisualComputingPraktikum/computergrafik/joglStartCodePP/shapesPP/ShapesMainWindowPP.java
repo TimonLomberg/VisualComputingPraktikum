@@ -65,6 +65,7 @@ public class ShapesMainWindowPP extends JFrame {
     private static final int FPS = 60; // animator's target frames per second
 
     public ShapesMainWindowPP() {
+
         // Setup an OpenGL context for the Canvas
         // Setup OpenGL to use the programmable pipeline
         // Setting to OpenGL 3

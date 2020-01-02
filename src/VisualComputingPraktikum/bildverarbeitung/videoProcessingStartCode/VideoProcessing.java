@@ -172,10 +172,6 @@ public class VideoProcessing extends JFrame {
 	    
     	   // convert the frame to a grayscale image
 		   Mat grayImg = new Mat();
-		  // Imgproc.cvtColor(frame, grayImg, Imgproc.COLOR_BGR2GRAY);
-    	   // binarize the grayscale image
-    	   //Imgproc.threshold(processedImage, processedImage, 127, 255,
-    		//	   Imgproc.THRESH_BINARY);
 
 		   //processedImage = Shape.shapeDetection(frame);
 		   //processedImage = HoughCirclesRun.HoughCircle(frame);
@@ -183,7 +179,7 @@ public class VideoProcessing extends JFrame {
 		   //processedImage = CameraCalibrator.detectAndDrawCorners(frame, 7,7);
 
 
-			if(collectFrames(calibSampleSize, frame, collectedFrames)) {
+			/*if(collectFrames(calibSampleSize, frame, collectedFrames)) {
 
 				boolean success = false;
 
@@ -202,7 +198,7 @@ public class VideoProcessing extends JFrame {
 
 				}
 
-				if(success) {
+				if(success) {*/
 
 					/*
 					ArrayList<MatOfPoint3f> objPoints = new ArrayList<MatOfPoint3f>();
@@ -229,7 +225,7 @@ public class VideoProcessing extends JFrame {
 
 					//for (int j = 0; j<objectPoints.get(0))
 
-						System.out.println(objectPoints.toString());
+						/*System.out.println(objectPoints.toString());
 
 					//CameraCalibrator.pnpGeneric(Converters.vector_Mat_to_Mat(objectPoints), Converters.vector_Mat_to_Mat(imagePoints),cameraMatrix,new MatOfDouble(distCoeffs),rvecs,tvecs);
 
@@ -238,7 +234,7 @@ public class VideoProcessing extends JFrame {
 
 				collectedFrames.clear();
 				System.out.println("" + cameraMatrix + " end matrix");
-			}
+			}*/
 
 
 

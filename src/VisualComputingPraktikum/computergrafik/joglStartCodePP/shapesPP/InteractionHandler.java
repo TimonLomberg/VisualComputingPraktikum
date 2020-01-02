@@ -336,6 +336,6 @@ public class InteractionHandler implements KeyListener, MouseListener, MouseMoti
             System.out.print("Mouse wheel moved event.");
             System.out.println(" Wheel rotation: " + e.getPreciseWheelRotation());
         }
-        eyeZ += eyeZInc * mouseWheelScrollFactor * e.getPreciseWheelRotation();
+        eyeZ += eyeZInc * mouseWheelScrollFactor *50* e.getPreciseWheelRotation();
     }
 }

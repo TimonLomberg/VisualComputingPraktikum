@@ -1,5 +1,6 @@
 package VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode;
 
+import VisualComputingPraktikum.computergrafik.joglStartCodePP.shapesPP.ShapesMainWindowPP;
 import org.opencv.core.Core;
 
 /**

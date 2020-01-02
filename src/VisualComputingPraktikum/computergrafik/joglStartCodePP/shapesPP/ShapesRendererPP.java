@@ -56,6 +56,8 @@ import com.jogamp.opengl.util.PMVMatrix;
  * @author Karsten Lehn
  * @version 22.10.2017
  *
+ * modified by Maike Leonie Huster
+ *
  */
 public class ShapesRendererPP extends GLCanvas implements GLEventListener {
 
@@ -206,7 +208,7 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
         pmvMatrix = new PMVMatrix();
 
         // Start parameter settings for the interaction handler might be called here
-        interactionHandler.setEyeZ(100f);
+        interactionHandler.setEyeZ(50f);
         // END: Preparing scene
     }
 
@@ -417,10 +419,10 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
         // Transform for the complete scene
 //        pmvMatrix.glTranslatef(1f, 0.2f, 0f);
 
+        //creates Objects depending on Tracker/Circles
         if(Tracking.greenCenterX != 0) {
             pmvMatrix.glPushMatrix();
             pmvMatrix.glTranslatef((float) Tracking.greenCenterX/10, -(float) Tracking.greenCenterY/10, -(float) Tracking.greenCenterZ/10);
-            pmvMatrix.glTranslatef(-1f,0f, 0f);
             displayObject0(gl);
             pmvMatrix.glPopMatrix();
         }
@@ -449,9 +451,10 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
     }
 
     private void displayObject0(GL3 gl) {
-        shaderProgram0.use();
+        //shaderProgram0.use();
         // Transfer the PVM-Matrix (model-view and projection matrix)
         // to the vertex shader
+        gl.glUseProgram(shaderProgram0.getShaderProgramID());
         gl.glUniformMatrix4fv(0, 1, false, pmvMatrix.glGetPMatrixf());
         gl.glUniformMatrix4fv(1, 1, false, pmvMatrix.glGetMvMatrixf());
         gl.glUniform3fv(shaderProgram0.getShaderProgramID(), 1 , color0Buffer);
@@ -462,7 +465,8 @@ public class ShapesRendererPP extends GLCanvas implements GLEventListener {
     }
 
     private void displayObject1(GL3 gl) {
-       shaderProgram1.use();
+        //shaderProgram1.use();
+        gl.glUseProgram(shaderProgram1.getShaderProgramID());
         // Transfer the PVM-Matrix (model-view and projection matrix) to the vertex shader
         gl.glUniformMatrix4fv(0, 1, false, pmvMatrix.glGetPMatrixf());
         gl.glUniformMatrix4fv(1, 1, false, pmvMatrix.glGetMvMatrixf());

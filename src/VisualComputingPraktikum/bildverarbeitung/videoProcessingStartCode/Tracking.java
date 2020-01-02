@@ -77,6 +77,12 @@ public class Tracking {
 
             for (int i = 0; i <= count; i++) {
                 Color colorCircle = new Color(result.getRGB((int) center.x, (int) center.y));
+                Imgproc.circle(image, center, (int) radius, new Scalar(255, 0, 255), 3, 8, 0);
+                System.err.println("Rot: " + colorCircle.getRed());
+                System.err.println("Grün: " + colorCircle.getGreen());
+                System.err.println("Blau: " + colorCircle.getBlue());
+
+
                 if (colorCircle.getGreen() > 160 && colorCircle.getRed() == 0 && colorCircle.getBlue() >= 115) {
                     Imgproc.circle(image, center, (int) radius, new Scalar(255, 0, 255), 3, 8, 0);
                     System.out.println("Grün");
@@ -85,7 +91,16 @@ public class Tracking {
                     greenCenterY = center.y;
                     greenCenterZ = distanceMeasure(RADIUS_OF_MARKER, FOCAL_LENGTH, radius);
 
-                } else if (colorCircle.getRed() > 250 && colorCircle.getBlue() ==0 && colorCircle.getGreen() >= 20) {
+                } else if (colorCircle.getBlue() >= 140 && colorCircle.getRed() < 45 && colorCircle.getBlue() >= 30 && colorCircle.getGreen() >= 30) {   //colorCircle.getBlue() >= 155 && colorCircle.getRed() == 255 && colorCircle.getGreen() >= 24
+                    Imgproc.circle(image, center,(int) radius, new Scalar(255, 0, 255), 3, 8, 0);
+                    System.out.println("Blau");
+
+                    pinkCenterX = center.x;
+                    pinkCenterY = center.y;
+                    pinkCenterZ = distanceMeasure(RADIUS_OF_MARKER, FOCAL_LENGTH, radius);
+
+
+                }else if (colorCircle.getBlue() >=60 &&  colorCircle.getRed() >= 45 && colorCircle.getGreen() >= 27) {  //colorCircle.getRed() > 250 && colorCircle.getBlue() ==0 && colorCircle.getGreen() >= 20
                     Imgproc.circle(image, center, (int)radius, new Scalar(255, 0, 255), 3, 8, 0);
                     System.out.println("Rot");
 
@@ -94,17 +109,7 @@ public class Tracking {
                     redCenterZ = distanceMeasure(RADIUS_OF_MARKER, FOCAL_LENGTH, radius);
 
 
-                } else if (colorCircle.getBlue() >= 155 && colorCircle.getRed() == 255 && colorCircle.getGreen() >= 24) {
-                    Imgproc.circle(image, center,(int) radius, new Scalar(255, 0, 255), 3, 8, 0);
-                    System.out.println("Pink");
-
-                    pinkCenterX = center.x;
-                    pinkCenterY = center.y;
-                    pinkCenterZ = distanceMeasure(RADIUS_OF_MARKER, FOCAL_LENGTH, radius);
-
-
-
-                } else if (colorCircle.getBlue() >=50 && colorCircle.getGreen() >= 27 && colorCircle.getRed() >= 45) {
+                } else if (colorCircle.getBlue() <=50 &&  colorCircle.getRed() <= 20 && colorCircle.getGreen() <= 30) {  //(colorCircle.getBlue() >=60 &&  colorCircle.getRed() >= 45 && colorCircle.getGreen() >= 27)
                     Imgproc.circle(image, center, (int)radius, new Scalar(255, 0, 255), 3, 8, 0);
                     System.out.println("Schwarz");
 
