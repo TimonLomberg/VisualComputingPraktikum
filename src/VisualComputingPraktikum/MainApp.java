@@ -35,18 +35,25 @@ public class MainApp {
         System.loadLibrary( Core.NATIVE_LIBRARY_NAME );
 
         shapesRenderer = new ShapesMainWindowPP();
-        shapesRenderer.setMainApp(this);
+        //shapesRenderer.setMainApp(this);
         //shapesRenderer.setVideoProcessing(videoProcessing);
         videoProcessing = new VideoProcessing();
-        videoProcessing.setMainApp(this);
+        //videoProcessing.setMainApp(this);
 
 
 
     }
 
+    public void init( ) {
+        shapesRenderer.setMainApp(this);
+        videoProcessing.setMainApp(this);
+    }
+
     public static void main(String[] args) {
 
 
-        new MainApp();
+        MainApp app = new MainApp();
+        app.init();
+
     }
 }
