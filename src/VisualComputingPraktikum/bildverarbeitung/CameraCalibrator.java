@@ -160,12 +160,13 @@ public class CameraCalibrator {
 
     public static void pnp(MatOfPoint3f objectPoints, MatOfPoint2f imagePoints, Mat cameraMatrix, MatOfDouble distCoeffs, Mat rvec, Mat tvec) {
         Calib3d.solvePnP(objectPoints,imagePoints,cameraMatrix,distCoeffs,rvec,tvec);
+
         Mat rotM = Mat.zeros(3, 3, CvType.CV_64F);
         Calib3d.Rodrigues(rvec, rotM);
         rotM.t();
-        tvec = rotM.inv().mul(tvec);
+        tvec = rotM.inv();//.mul(tvec);
 
-        System.out.println("Camera position estimated as " + tvec + " with rotation " + rotM);
+        System.out.println("Camera position estimated as " + tvec.dump() + " with rotation " + rotM.dump());
     }
 
     public static void pnpGeneric(Mat objectPoints, Mat imagePoints, Mat cameraMatrix, MatOfDouble distCoeffs, List<Mat> rvec, List<Mat> tvec) {
