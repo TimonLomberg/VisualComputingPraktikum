@@ -250,31 +250,27 @@ public class VideoProcessing extends JFrame {
 		   if(calibratorer.isCalibrated()) {
 
 			   MatOfPoint3f tmpObj = new MatOfPoint3f();
+			   MatOfPoint2f tmpImg = new MatOfPoint2f();
 
 
 			   ArrayList<Point3> tmp2 = new ArrayList<>();
 			   Converters.Mat_to_vector_Point3f(calibratorer.getObjectPoints().get(0), tmp2);
-			   for(Point3 point : tmp2) {
-				   ArrayList<Point3> a = new ArrayList<>();
-				   a.add(point);
-				   tmpObj.push_back(Converters.vector_Point3f_to_Mat(a));
-			   }
+			   tmpObj.fromList(tmp2);
 
 
-			   MatOfPoint2f tmpImg = new MatOfPoint2f();
+
 			   ArrayList<Point> tmp3 = new ArrayList<>();
 			   Converters.Mat_to_vector_Point(calibratorer.getImagePoints().get(0), tmp3);
-			   for(Point point : tmp3) {
-				   ArrayList<Point> a = new ArrayList<>();
-				   a.add(point);
-				   tmpImg.push_back(Converters.vector_Point_to_Mat(a));
+			   tmpImg.fromList(tmp3);
+
+			   rvecs = new Mat();
+			   tvecs = new Mat();
+
+			   CameraCalibrator.pnp(tmpObj, tmpImg, calibratorer.getIntrinsic(),new MatOfDouble(calibratorer.getDistCoeffs()) , rvecs, tvecs);
 			   }
 
 
-				rvecs = new Mat();
-			    tvecs = new Mat();
 
-			   CameraCalibrator.pnp(tmpObj, tmpImg, calibratorer.getIntrinsic(),new MatOfDouble(calibratorer.getDistCoeffs()) , rvecs, tvecs);
 
 
 		   }
