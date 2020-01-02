@@ -241,11 +241,24 @@ public class VideoProcessing extends JFrame {
 		   calibratorer.updateSettings();
 		   calibratorer.findAndDrawPoints(frame);
 		   calibratorer.takeSnapshot();
+           calibratorer.takeSnapshot();
+           calibratorer.takeSnapshot();
+           calibratorer.takeSnapshot();
+           calibratorer.takeSnapshot();
+           calibratorer.takeSnapshot();
+           calibratorer.takeSnapshot();
+           calibratorer.takeSnapshot();
+           calibratorer.takeSnapshot();
+           calibratorer.takeSnapshot();
+           calibratorer.takeSnapshot();
 
 
 
 
-    	   // Show processed image
+
+
+
+           // Show processed image
     	   imgPanel2.setImage(Mat2BufferedImage(processedImage));
     	   pack();
         
