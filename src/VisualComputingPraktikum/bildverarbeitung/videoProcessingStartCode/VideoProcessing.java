@@ -268,7 +268,11 @@ public class VideoProcessing extends JFrame {
 
 			   CameraCalibrator.pnp(tmpObj, tmpImg, calibratorer.getIntrinsic(), new MatOfDouble(calibratorer.getDistCoeffs()), rvecs, tvecs);
 
+				float alpha = (float) Math.atan(rvecs.get(1,0)[0] / rvecs.get(0,0)[0]);
 
+				float beta = (float) Math.atan(-rvecs.get(2,0)[0] / Math.sqrt(  Math.pow(rvecs.get(2,1)[0], 2) + Math.pow(rvecs.get(2,2)[0], 2) ));
+
+				float gamma = (float) Math.atan(rvecs.get(2,1)[0] / rvecs.get(2,2)[0]);
 
 
 
