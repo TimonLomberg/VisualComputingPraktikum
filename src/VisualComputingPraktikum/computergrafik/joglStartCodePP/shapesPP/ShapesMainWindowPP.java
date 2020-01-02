@@ -28,6 +28,7 @@ package VisualComputingPraktikum.computergrafik.joglStartCodePP.shapesPP; /**
 
 
 import VisualComputingPraktikum.MainApp;
+import VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode.VideoProcessing;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLCanvas;
@@ -56,6 +57,14 @@ import java.awt.event.WindowEvent;
  *
  */
 public class ShapesMainWindowPP extends JFrame {
+
+    public void setVideoProcessing(VideoProcessing videoProcessing) {
+        this.videoProcessing = videoProcessing;
+    }
+
+    public VideoProcessing videoProcessing;
+
+
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
