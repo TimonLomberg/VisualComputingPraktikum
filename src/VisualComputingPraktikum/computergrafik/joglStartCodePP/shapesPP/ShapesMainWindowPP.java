@@ -28,7 +28,6 @@ package VisualComputingPraktikum.computergrafik.joglStartCodePP.shapesPP; /**
 
 
 import VisualComputingPraktikum.MainApp;
-import VisualComputingPraktikum.bildverarbeitung.videoProcessingStartCode.VideoProcessing;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLCanvas;
@@ -64,9 +63,13 @@ public class ShapesMainWindowPP extends JFrame {
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+        canvasSH.setMainApp(this.mainApp);
     }
 
     public MainApp mainApp;
+
+    ShapesRendererPP canvasSH;
+    GLCanvas canvas;
 
     private static final long serialVersionUID = 1L;
     // Define constants for the top-level container
@@ -83,7 +86,9 @@ public class ShapesMainWindowPP extends JFrame {
         GLProfile profile = GLProfile.get(GLProfile.GL3);
         GLCapabilities capabilities = new GLCapabilities(profile);
         // Create the OpenGL rendering canvas
-        GLCanvas canvas = new ShapesRendererPP(capabilities);
+        canvasSH = new ShapesRendererPP(capabilities);
+        canvas = canvasSH;
+
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
 
         // Create an animator that drives the canvas display() at the specified
